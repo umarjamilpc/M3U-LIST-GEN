@@ -32,14 +32,50 @@ Pre-built images for **x86 (amd64)** and **Raspberry Pi (arm64)**:
 
 ### 1. Edit `docker-compose.yml`
 
-Set a strong password (and secret) under `environment:`:
+Set a strong password and a random `SECRET_KEY` under `environment:`:
 
 ```yaml
 environment:
-  SECRET_KEY: change-me-to-a-long-random-string
+  SECRET_KEY: paste-your-generated-key-here
   ADMIN_USERNAME: admin
   ADMIN_PASSWORD: your-strong-password
 ```
+
+#### How to create `SECRET_KEY`
+
+`SECRET_KEY` signs login cookies. It should be a long random string (32+ characters). Generate one once and keep it private — do not commit it to Git.
+
+**Linux / macOS / Unraid terminal:**
+
+```bash
+openssl rand -hex 32
+```
+
+**Windows PowerShell:**
+
+```powershell
+[Convert]::ToHexString((1..32 | ForEach-Object { Get-Random -Maximum 256 }) -as [byte[]]).ToLower()
+```
+
+Or with OpenSSL (if installed):
+
+```powershell
+openssl rand -hex 32
+```
+
+**Node.js (any OS):**
+
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+Example output (yours will be different):
+
+```text
+a3f8c1e92b7d4a6e0f1c8b9d2e5a7c0f3b6d9e1a4c7f0b2d5e8a1c4f7b0d3e6
+```
+
+Paste that value as `SECRET_KEY` in `docker-compose.yml`. If you change `SECRET_KEY` later, everyone will be logged out and must sign in again.
 
 Data is stored on the host (survives updates and restarts):
 
@@ -117,7 +153,7 @@ App data is stored in the `data/` folder next to the project (database, uploads,
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `SECRET_KEY` | Yes | Signs login cookies — use a long random string |
+| `SECRET_KEY` | Yes | Random secret used to sign login cookies (see **How to create SECRET_KEY** above) |
 | `ADMIN_USERNAME` | Yes | First admin username |
 | `ADMIN_PASSWORD` | Yes | First admin password |
 
