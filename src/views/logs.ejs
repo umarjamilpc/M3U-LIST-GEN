@@ -1,0 +1,62 @@
+<div class="row-head page-head reveal">
+  <div>
+    <h1>Logs</h1>
+    <p class="muted">Recent generate / refresh jobs. Copy or download a log to share for debugging.</p>
+  </div>
+</div>
+
+<div class="logs-layout">
+  <aside class="logs-list panel">
+    <h2>Recent jobs</h2>
+    <% if (!jobs || !jobs.length) { %>
+    <p class="muted">No jobs yet. Generate a playlist to see logs here.</p>
+    <% } else { %>
+    <ul class="job-history">
+      <% jobs.forEach(function(j) { %>
+      <li class="<%= selected && selected.id === j.id ? 'is-active' : '' %>">
+        <a href="/logs?job=<%= j.id %>">
+          <strong><%= j.title %></strong>
+          <span class="muted small"><%= j.status %> · <%= j.id %></span>
+        </a>
+      </li>
+      <% }); %>
+    </ul>
+    <% } %>
+  </aside>
+
+  <section class="panel logs-detail">
+    <% if (selected) { %>
+    <div class="row-head">
+      <div>
+        <h2><%= selected.title %></h2>
+        <p class="muted small">ID <%= selected.id %> · <%= selected.status %>
+          <% if (selected.error) { %> · <span class="err"><%= selected.error %></span><% } %>
+        </p>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-secondary" id="copy-log">Copy log</button>
+        <a class="btn btn-secondary" href="/api/jobs/<%= selected.id %>/log.txt">Download .txt</a>
+      </div>
+    </div>
+    <pre class="job-log job-log-tall" id="full-log"><%= (selected.log || []).join('\n') %></pre>
+    <% } else { %>
+    <p class="muted">Select a job to view its full activity log.</p>
+    <% } %>
+  </section>
+</div>
+<script>
+(function(){
+  const btn = document.getElementById('copy-log');
+  const pre = document.getElementById('full-log');
+  if(!btn || !pre) return;
+  btn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(pre.textContent || '');
+      btn.textContent = 'Copied';
+      setTimeout(() => { btn.textContent = 'Copy log'; }, 1500);
+    } catch (e) {
+      alert('Copy failed: ' + e);
+    }
+  });
+})();
+</script>

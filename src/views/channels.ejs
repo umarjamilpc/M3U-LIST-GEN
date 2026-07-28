@@ -1,0 +1,317 @@
+<%
+  const wiz = !!wizard;
+  const qf = quality_filter || new Set();
+  const total = typeof selected_total !== 'undefined' ? selected_total : (selected || []).length;
+  const act = active_cat || '';
+  const sact = active_src_cat || '';
+  const enc = encodeURIComponent;
+  const msgText = message ? String(message).replace(/\+/g, ' ') : '';
+%>
+<% if (wiz) { %>
+<div class="wizard wizard-channels">
+  <header class="wizard-head">
+    <p class="wizard-kicker">Setup · step 4 of 5 · pick &amp; arrange channels</p>
+    <div class="row-head page-head">
+      <div>
+        <h1><%= playlist.name %></h1>
+        <p class="muted">Edit your channel list</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-secondary" href="/">Dashboard</a>
+      </div>
+    </div>
+  </header>
+  <ol class="wizard-steps" aria-label="Setup steps">
+    <li class="is-done"><a href="/playlists/<%= playlist.id %>/wizard/name"><span class="n">1</span> Name</a></li>
+    <li class="is-done"><a href="/playlists/<%= playlist.id %>/wizard/source"><span class="n">2</span> Source</a></li>
+    <li class="is-done"><a href="/playlists/<%= playlist.id %>/wizard/guide"><span class="n">3</span> Guide</a></li>
+    <li class="is-active"><span class="n">4</span> Channels</li>
+    <li><a href="/playlists/<%= playlist.id %>/wizard/generate"><span class="n">5</span> Generate</a></li>
+  </ol>
+</div>
+<% } else { %>
+<div class="row-head page-head">
+  <div>
+    <h1><%= playlist.name %></h1>
+    <p class="muted">Channels</p>
+  </div>
+  <div class="actions">
+    <a class="btn btn-secondary" href="/playlists/<%= playlist.id %>/wizard/name">Edit wizard</a>
+    <a class="btn btn-secondary" href="/">Dashboard</a>
+  </div>
+</div>
+<% } %>
+
+<% if (msgText) { %><p class="ok-msg"><%= msgText %></p><% } %>
+<% if (source_error) { %><p class="err">Source M3U error: <%= source_error %></p><% } %>
+
+<section class="panel quality-panel">
+  <div class="panel-head">
+    <h2>Stream quality</h2>
+    <p class="muted small">Optional filter for Your list. Leave qualities unchecked to keep all.</p>
+  </div>
+  <form method="post" action="/playlists/<%= playlist.id %>/channels/quality" class="quality-form"
+        onsubmit="return confirm('Apply quality filter to ALL channels in Your list?')">
+    <% if (wiz) { %><input type="hidden" name="wizard" value="1"><% } %>
+    <% if (act) { %><input type="hidden" name="cat" value="<%= act %>"><% } %>
+    <% if (sact) { %><input type="hidden" name="src_cat" value="<%= sact %>"><% } %>
+    <div class="quality-grid">
+      <fieldset class="quality-keep">
+        <legend>Keep</legend>
+        <div class="quality-checks">
+          <% (quality_choices || []).forEach(function(pair) {
+            const code = pair[0], label = pair[1];
+          %>
+          <label class="check">
+            <input type="checkbox" name="quality" value="<%= code %>" <%= qf.has && qf.has(code) ? 'checked' : '' %>>
+            <%= label %>
+          </label>
+          <% }); %>
+        </div>
+      </fieldset>
+      <div class="quality-opts">
+        <label class="check">
+          <input type="checkbox" name="dedupe_by_name" value="1" <%= dedupe_by_name ? 'checked' : '' %>>
+          One stream per channel name
+        </label>
+        <label>If duplicates
+          <select name="prefer_quality">
+            <option value="best" <%= prefer_quality === 'best' ? 'selected' : '' %>>Highest</option>
+            <option value="lowest" <%= prefer_quality === 'lowest' ? 'selected' : '' %>>Lowest</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="panel-actions">
+      <button type="submit" class="btn">Apply</button>
+    </div>
+  </form>
+</section>
+
+<section class="panel" id="your-list">
+  <form method="post" action="/playlists/<%= playlist.id %>/channels/save" id="channels-main-form">
+    <% if (wiz) { %><input type="hidden" name="wizard" value="1"><% } %>
+    <% if (sact) { %><input type="hidden" name="src_cat" value="<%= sact %>"><% } %>
+    <input type="hidden" name="cat_order" id="cat-order" value="<%= (category_groups || []).map(function(cg){ return cg.name; }).join('||') %>">
+    <input type="hidden" name="layout_json" id="layout-json" value="">
+
+    <div class="row-head sticky-actions panel-head">
+      <div>
+        <h2>Your list (<%= total %>)</h2>
+        <% if (!total) { %>
+        <p class="muted small">Empty — use <strong>New category / New channel</strong> below, <strong>Reset</strong> to load from source, or pick channels under Add from source.</p>
+        <% } else { %>
+        <p class="muted small">Click the channel icon for icon URL; the play button after Category edits stream URL. Drag only from ⠿. Name and tvg-id are selectable to copy.</p>
+        <% } %>
+      </div>
+      <div class="actions">
+        <button type="submit" class="btn">Save</button>
+        <a class="btn btn-secondary" href="/playlists/<%= playlist.id %>/channels/export.csv">Export CSV</a>
+        <button type="button" class="btn btn-secondary" id="import-csv-btn">Import CSV</button>
+        <button type="submit" class="btn btn-danger js-confirm-submit" form="channels-reset-form"
+                data-confirm="Reset Your list from the source M3U? This replaces your current list.">Reset</button>
+      </div>
+    </div>
+
+    <%- include('_channel_create_boxes', { playlist: playlist, categories: categories }) %>
+
+    <ul class="cat-accordion" id="cat-manager" aria-label="Categories"
+        data-playlist-id="<%= playlist.id %>"
+        data-wizard="<%= wiz ? '1' : '' %>"
+        data-src-cat="<%= sact %>"
+        data-multi-open="1">
+      <% (category_groups || []).forEach(function(cg) { %>
+      <li class="cat-item<%= cg.open ? ' is-open' : '' %>" data-cat="<%= cg.name %>">
+        <div class="cat-head">
+          <span class="drag-handle cat-drag" draggable="true" title="Drag to reorder category" aria-label="Drag category">⠿</span>
+          <a class="cat-toggle"
+             href="/playlists/<%= playlist.id %>/channels?<%= wiz ? 'wizard=1&' : '' %>cat=<%= enc(cg.name) %><%= sact ? '&src_cat=' + enc(sact) : '' %>"
+             aria-expanded="<%= cg.open ? 'true' : 'false' %>">
+            <span class="cat-chevron" aria-hidden="true"></span>
+            <span class="cat-title"><%= cg.name %></span>
+            <span class="count"><%= cg.count %></span>
+          </a>
+          <input type="text" class="cat-rename-input" value="<%= cg.name %>"
+                 data-old="<%= cg.name %>" title="Rename category" aria-label="Rename category">
+          <button type="button" class="btn btn-danger btn-cat-delete" data-cat="<%= cg.name %>"
+                  title="Delete category and all its channels">Delete</button>
+        </div>
+
+        <% if (cg.open) { %>
+        <%- include('_channel_cat_panel', { cat_name: cg.name, channels: cg.channels, categories: categories }) %>
+        <% } %>
+      </li>
+      <% }); %>
+    </ul>
+  </form>
+
+  <form method="post" action="/playlists/<%= playlist.id %>/channels/reset" id="channels-reset-form" class="inline-form"
+        data-loading-msg="Resetting from source…" hidden>
+    <% if (wiz) { %><input type="hidden" name="wizard" value="1"><% } %>
+  </form>
+
+  <form method="post" action="/playlists/<%= playlist.id %>/channels/import-csv" enctype="multipart/form-data" class="import-csv-top" id="import-csv-form" hidden>
+    <% if (wiz) { %><input type="hidden" name="wizard" value="1"><% } %>
+    <input type="file" name="csv_file" id="csv-file-input" accept=".csv,text/csv,text/plain">
+  </form>
+</section>
+
+<section class="panel" id="add-from-source"
+         data-playlist-id="<%= playlist.id %>"
+         data-wizard="<%= wiz ? '1' : '' %>"
+         data-active-cat="<%= act %>"
+         data-src-cat="<%= sact %>">
+  <div class="row-head panel-head">
+    <h2>Add from source <span class="muted small" id="source-remaining-label"><% if (typeof source_total !== 'undefined') { %>(<%= source_remaining %> remaining of <%= source_total %>)<% } %></span></h2>
+    <form method="get" action="/playlists/<%= playlist.id %>/channels#add-from-source" class="search-inline" id="source-search-form" data-no-loading="1">
+      <% if (wiz) { %><input type="hidden" name="wizard" value="1"><% } %>
+      <% if (act) { %><input type="hidden" name="cat" value="<%= act %>"><% } %>
+      <input type="hidden" name="src_cat" id="source-search-src-cat" value="<%= sact %>">
+      <input name="q" id="source-search-input" value="<%= q || '' %>" placeholder="Search source…" autocomplete="off">
+      <button type="submit" class="btn btn-secondary">Search</button>
+    </form>
+  </div>
+
+  <div class="source-cat-toolbar actions toolbar-secondary" id="source-cat-toolbar">
+    <label class="check source-cat-select-all">
+      <input type="checkbox" id="select-all-source-cats" title="Select all categories">
+      Select all categories
+    </label>
+    <button type="button" class="btn btn-secondary btn-small" id="clear-source-cats">Clear categories</button>
+    <span class="muted small" id="source-cat-pick-count">0 categories selected</span>
+  </div>
+
+  <div class="cat-chips" id="source-cat-chips" role="group" aria-label="Source categories">
+    <% (source_cat_counts || []).forEach(function(pair) {
+      const name = pair[0], count = pair[1];
+    %>
+    <div class="cat-chip<%= name === sact ? ' is-active' : '' %>" data-src-cat="<%= name %>">
+      <input type="checkbox" class="source-cat-pick" name="src_cats" value="<%= name %>"
+             title="Select category “<%= name %>” to add" aria-label="Select <%= name %>">
+      <button type="button" class="cat-chip-filter" data-src-cat="<%= name %>">
+        <%= name %> <span class="count"><%= count %></span>
+      </button>
+    </div>
+    <% }); %>
+  </div>
+
+  <form method="post" action="/playlists/<%= playlist.id %>/channels/add" id="source-add-form" data-no-loading="1">
+    <% if (wiz) { %><input type="hidden" name="wizard" value="1"><% } %>
+    <% if (act) { %><input type="hidden" name="cat" value="<%= act %>"><% } %>
+    <input type="hidden" name="src_cat" id="source-add-src-cat" value="<%= sact %>">
+    <div id="source-list-mount">
+    <% if (source_error) { %>
+    <p class="err"><%= source_error %></p>
+    <% } else if (!source_loaded) { %>
+    <p class="muted">Source list not loaded.</p>
+    <% } else if (!source_preview || !source_preview.length) { %>
+    <p class="muted" id="source-empty-msg"><% if (total) { %>No remaining channels in this source category.<% } else { %>No source channels found.<% } %></p>
+    <% } else { %>
+    <h3 class="cat-heading"><span id="source-cat-heading"><%= sact %></span> <span class="muted small" id="source-cat-count">(<%= source_preview.length %>)</span></h3>
+    <div class="actions toolbar-secondary">
+      <button type="button" class="btn btn-secondary" id="select-all-source">Select all</button>
+      <button type="button" class="btn btn-secondary" id="select-none-source">Select none</button>
+      <span class="muted small" id="source-pick-count">0 selected</span>
+    </div>
+    <div class="table-wrap source-list">
+      <table>
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="select-all-source-head" title="Select all"></th>
+            <th class="col-logo" aria-label="Logo"></th>
+            <th>Name</th>
+            <th>Quality</th>
+            <th>Category</th>
+            <th>tvg-id</th>
+            <th>Group</th>
+          </tr>
+        </thead>
+        <tbody id="source-list-body">
+        <% source_preview.forEach(function(s) { %>
+          <tr class="source-row" data-tvg-id="<%= s.tvg_id || '' %>" data-url="<%= s.url || '' %>" data-category="<%= s.category || '' %>">
+            <td><input type="checkbox" class="source-pick" name="pick" value="<%= s.tvg_id %>||<%= s.url %>"></td>
+            <td class="logo-cell">
+              <% if (s.logo) { %>
+              <img class="ch-logo" src="<%= s.logo %>" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.classList.add('is-broken');this.removeAttribute('src')">
+              <% } else { %>
+              <span class="ch-logo ch-logo-empty" aria-hidden="true"></span>
+              <% } %>
+            </td>
+            <td class="selectable-text"><%= s.name %></td>
+            <td><span class="quality-badge q-<%= s.quality %> selectable-text"><%= s.quality %></span></td>
+            <td class="muted small selectable-text"><%= s.category || '—' %></td>
+            <td class="muted small mono selectable-text"><%= s.tvg_id || '—' %></td>
+            <td class="muted small selectable-text"><%= s.group %></td>
+          </tr>
+        <% }); %>
+        </tbody>
+      </table>
+    </div>
+    <div class="actions source-add-actions" style="margin-top:1rem">
+      <button type="submit" class="btn">Add selected</button>
+    </div>
+    <% } %>
+    </div>
+  </form>
+</section>
+
+<% if (wiz) { %>
+<div class="wizard-nav">
+  <a class="btn btn-secondary" href="/playlists/<%= playlist.id %>/wizard/guide">Back</a>
+  <% if (!playlist.setup_complete) { %>
+  <form method="post" action="/playlists/<%= playlist.id %>/delete" data-no-loading="1" style="display:inline;margin-left:.5rem" onsubmit="return confirm('Discard this unfinished playlist?')">
+    <button type="submit" class="btn btn-secondary">Discard</button>
+  </form>
+  <% } %>
+  <div class="wizard-nav-right">
+    <a class="btn" href="/playlists/<%= playlist.id %>/wizard/generate">Next</a>
+  </div>
+</div>
+<% } %>
+
+<dialog id="url-edit-dialog" class="url-edit-dialog">
+  <form method="dialog" id="url-edit-form" class="url-edit-form" data-no-loading="1">
+    <header class="url-edit-head">
+      <h3 id="url-edit-title">Edit URL</h3>
+      <p class="muted small url-edit-channel-name selectable-text" id="url-edit-channel-name"></p>
+    </header>
+    <label>
+      <span id="url-edit-field-label">URL</span>
+      <div class="url-edit-row">
+        <input type="text" id="url-edit-value" class="selectable-field" placeholder="https://…" spellcheck="false">
+        <button type="button" class="btn btn-secondary btn-copy-field" data-target="url-edit-value" title="Copy">Copy</button>
+      </div>
+    </label>
+    <footer class="url-edit-actions">
+      <button type="submit" value="cancel" class="btn btn-secondary">Cancel</button>
+      <button type="submit" value="ok" class="btn">Apply</button>
+    </footer>
+  </form>
+</dialog>
+
+<dialog id="app-confirm-dialog" class="url-edit-dialog">
+  <form method="dialog" id="app-confirm-form" class="url-edit-form" data-no-loading="1">
+    <header class="url-edit-head">
+      <h3 id="app-confirm-title">Confirm</h3>
+      <p class="muted small" id="app-confirm-msg"></p>
+    </header>
+    <footer class="url-edit-actions">
+      <button type="submit" value="cancel" class="btn btn-secondary">Cancel</button>
+      <button type="submit" value="ok" class="btn" id="app-confirm-ok">OK</button>
+    </footer>
+  </form>
+</dialog>
+
+<dialog id="app-alert-dialog" class="url-edit-dialog">
+  <form method="dialog" id="app-alert-form" class="url-edit-form" data-no-loading="1">
+    <header class="url-edit-head">
+      <h3>Notice</h3>
+      <p class="muted small" id="app-alert-msg"></p>
+    </header>
+    <footer class="url-edit-actions">
+      <button type="submit" value="ok" class="btn">OK</button>
+    </footer>
+  </form>
+</dialog>
+
+<script src="/static/channels.js"></script>

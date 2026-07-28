@@ -1,0 +1,137 @@
+<%
+  const tzList = timezones || [];
+  const playlists = refreshPlaylists || [];
+  const DAY_PRESETS = [
+    { value: '0,1,2,3,4,5,6', label: 'Every day' },
+    { value: '1,2,3,4,5', label: 'Weekdays (Mon–Fri)' },
+    { value: '0,6', label: 'Weekends (Sat–Sun)' },
+    { value: '1,2,3,4,5,6', label: 'Mon–Sat' },
+    { value: '0,1,2,3,4,5', label: 'Sun–Fri' },
+  ];
+  function normDays(raw) {
+    return String(raw || '')
+      .split(',')
+      .map(function (d) { return d.trim(); })
+      .filter(Boolean)
+      .sort()
+      .join(',');
+  }
+  function matchDays(raw) {
+    const n = normDays(raw);
+    for (var i = 0; i < DAY_PRESETS.length; i++) {
+      if (normDays(DAY_PRESETS[i].value) === n) return DAY_PRESETS[i].value;
+    }
+    return '0,1,2,3,4,5,6';
+  }
+  const TIME_OPTS = [];
+  for (var h = 0; h < 24; h++) {
+    for (var m = 0; m < 60; m += 30) {
+      TIME_OPTS.push(
+        String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0')
+      );
+    }
+  }
+  playlists.forEach(function(pl) {
+    var t = String(pl.refresh_time || '04:00').slice(0, 5);
+    if (t && TIME_OPTS.indexOf(t) < 0) TIME_OPTS.push(t);
+  });
+  TIME_OPTS.sort();
+%>
+<div class="row-head page-head reveal">
+  <h1>Settings
+    <button type="button" class="help-btn" data-help="Set a separate M3U refresh schedule for each playlist. Only playlists marked On are rebuilt. EPG stays external." aria-label="Help">?</button>
+  </h1>
+</div>
+
+<% if (message) { %><p class="ok-msg"><%= message %></p><% } %>
+
+<form class="form" method="post" action="/settings">
+  <% if (user.is_admin && s) { %>
+  <label>Public base URL <span class="muted">(optional override)</span>
+    <input name="public_base_url" value="<%= s.public_base_url || '' %>" placeholder="Leave blank — auto from request / Nginx Proxy Manager">
+  </label>
+  <p class="muted small">Leave empty so playlist links match how you open the app: <code>http://LAN-IP:3000</code> locally or <code>https://your-domain</code> via Nginx Proxy Manager. Only set this if you must force one origin.</p>
+
+  <fieldset class="panel settings-block">
+    <h2>Storage limits</h2>
+    <p class="muted small">Default quota for each user (override per user on the Users page). Upload caps apply to every user. Set quota to 0 for unlimited.</p>
+    <div class="refresh-playlist-fields">
+      <label>Default storage quota (MB)
+        <input type="number" name="storage_quota_mb" min="0" step="1" value="<%= s.storage_quota_mb || '500' %>">
+      </label>
+      <label>Max M3U upload (MB)
+        <input type="number" name="max_m3u_upload_mb" min="1" step="1" value="<%= s.max_m3u_upload_mb || '20' %>">
+      </label>
+    </div>
+  </fieldset>
+  <% } %>
+
+  <fieldset class="panel settings-block">
+    <h2>Scheduled M3U refresh</h2>
+    <p class="muted small">Each playlist can use its own timezone, daily time, days, and interval. EPG is not rebuilt here.</p>
+
+    <% if (!playlists.length) { %>
+    <p class="muted">No playlists yet. Create one first, then set its schedule here.</p>
+    <% } else { %>
+    <div class="refresh-playlist-list">
+      <% playlists.forEach(function(pl) {
+        const daysVal = matchDays(pl.refresh_days);
+        const interval = String(pl.refresh_interval_hours || '0');
+        const timeVal = String(pl.refresh_time || '04:00').slice(0, 5);
+      %>
+      <div class="refresh-playlist-row">
+        <input type="hidden" name="playlist_id" value="<%= pl.id %>">
+        <div class="refresh-playlist-name">
+          <strong><%= pl.name %></strong>
+          <span class="muted small"><code><%= pl.slug %></code></span>
+        </div>
+        <div class="refresh-playlist-fields">
+          <label>Schedule
+            <select name="enabled_<%= pl.id %>">
+              <option value="0" <%= !pl.enabled ? 'selected' : '' %>>Off</option>
+              <option value="1" <%= pl.enabled ? 'selected' : '' %>>On</option>
+            </select>
+          </label>
+          <label>Timezone
+            <select name="tz_<%= pl.id %>">
+              <% tzList.forEach(function(tz) { %>
+              <option value="<%= tz %>" <%= (pl.refresh_timezone || 'UTC') === tz ? 'selected' : '' %>><%= tz %></option>
+              <% }); %>
+            </select>
+          </label>
+          <label>Daily time
+            <select name="time_<%= pl.id %>">
+              <% TIME_OPTS.forEach(function(t) { %>
+              <option value="<%= t %>" <%= timeVal === t ? 'selected' : '' %>><%= t %></option>
+              <% }); %>
+            </select>
+          </label>
+          <label>Days
+            <select name="days_<%= pl.id %>">
+              <% DAY_PRESETS.forEach(function(p) { %>
+              <option value="<%= p.value %>" <%= daysVal === p.value ? 'selected' : '' %>><%= p.label %></option>
+              <% }); %>
+            </select>
+          </label>
+          <label>Also every
+            <select name="interval_<%= pl.id %>">
+              <option value="0" <%= interval === '0' ? 'selected' : '' %>>Off — daily only</option>
+              <option value="6" <%= interval === '6' ? 'selected' : '' %>>6 hours</option>
+              <option value="12" <%= interval === '12' ? 'selected' : '' %>>12 hours</option>
+              <option value="24" <%= interval === '24' ? 'selected' : '' %>>24 hours</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+    <% } %>
+  </fieldset>
+
+  <div class="actions">
+    <button type="submit" class="btn">Save</button>
+  </div>
+</form>
+<% if (user.is_admin) { %>
+<p class="muted small">Server env: <code>SECRET_KEY</code>, <code>ADMIN_*</code>, <code>DATA_DIR</code>. Port defaults to <code>3000</code>.</p>
+<% } %>

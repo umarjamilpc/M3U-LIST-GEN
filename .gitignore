@@ -1,0 +1,14 @@
+# Dependencies & local data
+node_modules/
+data/
+.env
+*.db
+*.db-*
+.DS_Store
+
+# Editor / local tooling (not needed to build or run)
+.cursor/
+design-system/
+.vscode/
+*.log
+npm-debug.log*

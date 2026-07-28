@@ -1,0 +1,75 @@
+<div class="row-head page-head reveal">
+  <div>
+    <h1>Your playlists</h1>
+    <p class="muted">Build filtered M3U playlists and share them with your players.</p>
+  </div>
+  <div class="actions">
+    <form method="post" action="/generate-all" data-loading-msg="Rebuilding playlists…">
+      <button type="submit" class="btn btn-secondary">Rebuild all</button>
+    </form>
+    <a class="btn" href="/playlists/new">Create playlist</a>
+  </div>
+</div>
+
+<% if (!playlists.length) { %>
+<div class="empty-state reveal">
+  <p>No playlists yet. Create one and walk through the short setup.</p>
+  <a class="btn" href="/playlists/new">Create playlist</a>
+</div>
+<% } else { %>
+<div class="playlist-grid">
+  <% playlists.forEach(function(pl) {
+    const st = String(pl.last_status || 'never');
+    const stLabel = st === 'ok' ? 'Ready' : (st === 'error' ? 'Failed' : (st === 'running' ? 'Building…' : 'Not built'));
+  %>
+  <article class="playlist-card">
+    <div class="playlist-card-head">
+      <div>
+        <h2><%= pl.name %></h2>
+        <p class="muted small"><% if (user.is_admin) { %><%= pl.username %> · <% } %><span class="mono"><%= pl.slug %></span><% if (pl.countries) { %> · <%= pl.countries %><% } %></p>
+      </div>
+      <span class="status <%= st %>" title="<%= st %>"><%= stLabel %></span>
+    </div>
+
+    <div class="playlist-meta">
+      <span class="stat-pill"><%= pl.matched_count %> channels<% if (pl.missing_count) { %> · <span class="warn"><%= pl.missing_count %> missing</span><% } %></span>
+      <% if (pl.last_generated_at) { %>
+      <span class="muted small">Updated <%= pl.last_generated_at %> UTC</span>
+      <% } %>
+    </div>
+    <% if (pl.last_error) { %><p class="err small"><%= pl.last_error %></p><% } %>
+
+    <div class="playlist-primary">
+      <a class="btn" href="/playlists/<%= pl.id %>/channels?wizard=0">Edit channels</a>
+      <a class="btn btn-secondary" href="<%= pl.urls.playlist %>" download="<%= pl.slug %>.m3u">Download M3U</a>
+    </div>
+
+    <div class="urls">
+      <code class="copy" title="Copy this URL into your IPTV player">Playlist URL · <%= pl.urls.playlist %></code>
+      <%
+        const epgList = pl.epg_url
+          ? String(pl.epg_url).split(/[\n,]+/).map(function(u){ return u.trim(); }).filter(Boolean)
+          : [];
+      %>
+      <% if (epgList.length) { %>
+        <% epgList.forEach(function(eu) { %>
+      <code class="copy" title="EPG guide URL for your player (not downloaded by this app)">EPG URL · <%= eu %></code>
+        <% }); %>
+      <% } else { %>
+      <p class="muted small">No EPG URL set — add one in Setup → Guide.</p>
+      <% } %>
+    </div>
+
+    <div class="row-actions playlist-more">
+      <form method="post" action="/playlists/<%= pl.id %>/generate" data-loading-msg="Building playlist…">
+        <button class="btn btn-secondary" type="submit">Rebuild</button>
+      </form>
+      <a class="btn btn-secondary" href="/playlists/<%= pl.id %>/wizard/name">Setup</a>
+      <form method="post" action="/playlists/<%= pl.id %>/delete" data-no-loading="1" onsubmit="return confirm('Delete “<%= pl.name %>”? This cannot be undone.')">
+        <button class="btn btn-danger" type="submit">Delete</button>
+      </form>
+    </div>
+  </article>
+  <% }); %>
+</div>
+<% } %>

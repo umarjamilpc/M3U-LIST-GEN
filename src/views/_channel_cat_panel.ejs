@@ -1,0 +1,85 @@
+<div class="cat-panel" data-cat="<%= cat_name %>">
+  <div class="actions toolbar-secondary panel-toolbar">
+    <button type="button" class="btn btn-secondary bulk-delete-all"
+            data-confirm="Delete all channels in “<%= cat_name %>”? They will return to Add from source if they came from source.">
+      Delete all in category
+    </button>
+  </div>
+  <div class="table-wrap cat-channels">
+    <table class="channels-table">
+      <thead>
+        <tr>
+          <th class="col-drag" aria-label="Drag"></th>
+          <th class="col-pos">#</th>
+          <th class="col-logo" aria-label="Logo"></th>
+          <th class="col-name">Name</th>
+          <th class="col-q">Quality</th>
+          <th class="col-cat">Category</th>
+          <th class="col-stream" aria-label="Stream URL"></th>
+          <th class="col-tvg">tvg-id</th>
+          <th class="col-actions"></th>
+        </tr>
+      </thead>
+      <tbody class="selected-body" data-drop-list="channels">
+      <% (channels || []).forEach(function(ch, idx) {
+        const displayName = ch.custom_name || ch.requested_name || ch.source_name || '';
+        const streamUrl = ch.source_url || '';
+        const logoUrl = ch.source_logo || '';
+        const tvgId = ch.source_tvg_id || '';
+      %>
+        <tr class="ch-row" data-id="<%= ch.id %>"
+            data-quality="<%= ch.quality %>"
+            data-dedupe-key="<%= ch.dedupe_key %>"
+            data-tvg-id="<%= tvgId %>"
+            data-url="<%= streamUrl %>"
+            data-logo="<%= logoUrl %>"
+            data-name="<%= displayName %>"
+            data-group="<%= ch.source_group || '' %>"
+            data-category="<%= ch.category || cat_name %>">
+          <td class="drag-cell" title="Drag to reorder or move category">
+            <span class="drag-handle ch-drag" draggable="true" aria-label="Drag channel">⠿</span>
+          </td>
+          <td class="pos"><%= idx + 1 %></td>
+          <td class="logo-cell">
+            <button type="button" class="logo-edit-btn" title="Edit icon URL" aria-label="Edit icon URL">
+              <% if (logoUrl) { %>
+              <img class="ch-logo logo-preview" src="<%= logoUrl %>" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.classList.add('is-broken');this.removeAttribute('src')">
+              <% } else { %>
+              <span class="ch-logo ch-logo-empty logo-preview" aria-hidden="true"></span>
+              <% } %>
+            </button>
+          </td>
+          <td class="name-cell">
+            <input type="hidden" name="channel_id" value="<%= ch.id %>">
+            <input name="custom_name_<%= ch.id %>" value="<%= displayName %>" title="Channel name" class="ch-name-input selectable-field" spellcheck="false">
+            <input type="hidden" name="source_url_<%= ch.id %>" value="<%= streamUrl %>" class="ch-url-input">
+            <input type="hidden" name="source_logo_<%= ch.id %>" value="<%= logoUrl %>" class="ch-logo-input">
+          </td>
+          <td><span class="quality-badge q-<%= ch.quality %> selectable-text"><%= ch.quality %></span></td>
+          <td>
+            <select name="category_<%= ch.id %>" class="cat-select">
+              <% (categories || []).forEach(function(cname) { %>
+              <option value="<%= cname %>" <%= ch.category === cname ? 'selected' : '' %>><%= cname %></option>
+              <% }); %>
+            </select>
+          </td>
+          <td class="stream-cell">
+            <button type="button" class="btn-icon btn-edit-stream<%= streamUrl ? '' : ' is-empty' %>" title="Edit stream URL" aria-label="Edit stream URL">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M8 5v14l11-7L8 5z"/>
+              </svg>
+            </button>
+          </td>
+          <td class="tvg-cell">
+            <input name="source_tvg_<%= ch.id %>" value="<%= tvgId %>"
+                   class="ch-tvg-input selectable-field" placeholder="tvg-id" title="tvg-id" spellcheck="false">
+          </td>
+          <td class="row-actions">
+            <button type="button" class="btn btn-danger btn-ch-delete" data-id="<%= ch.id %>" title="Delete channel">Delete</button>
+          </td>
+        </tr>
+      <% }); %>
+      </tbody>
+    </table>
+  </div>
+</div>

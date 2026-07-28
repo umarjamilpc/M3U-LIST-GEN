@@ -1,0 +1,332 @@
+<%
+  const plid = playlist && playlist.id ? playlist.id : null;
+  const isDraft = typeof is_draft !== 'undefined' ? Boolean(is_draft) : !plid;
+  const step = typeof wizard_step !== 'undefined' ? wizard_step : 'name';
+  const labels = { name:'Name', source:'Source', guide:'Guide', channels:'Channels', generate:'Generate' };
+  const step_order = ['name','source','guide','channels','generate'];
+  const step_i = step_order.indexOf(step) >= 0 ? step_order.indexOf(step) : 0;
+  const formAction = plid
+    ? '/playlists/' + plid + '/wizard/' + step
+    : (step === 'name' ? '/playlists/new' : '/playlists/new/wizard/' + step);
+  const draftStepHref = function(s) {
+    if (s === 'name') return '/playlists/new';
+    return '/playlists/new/wizard/' + s;
+  };
+%>
+<div class="wizard<%= step === 'generate' ? ' wizard-generate' : '' %>" data-playlist-id="<%= plid || '' %>">
+  <header class="wizard-head">
+    <p class="wizard-kicker">Playlist setup · step <%= step_i + 1 %> of 5</p>
+    <h1><%= title %>
+      <button type="button" class="help-btn" data-help="Guided setup for a filtered M3U playlist. EPG is an external URL (EPG-LIST-GEN) — this app only builds M3U." aria-label="Help">?</button>
+    </h1>
+  </header>
+
+  <% if (message) { %><p class="ok-msg"><%= message %></p><% } %>
+  <% if (error) { %><p class="err"><%= error %></p><% } %>
+
+  <ol class="wizard-steps" aria-label="Setup steps">
+    <% step_order.forEach(function(s, si) { %>
+    <li class="<%= si === step_i ? 'is-active' : (si < step_i ? 'is-done' : '') %>">
+      <% if (plid) { %>
+      <a href="<%= s === 'channels' ? '/playlists/'+plid+'/channels?wizard=1' : '/playlists/'+plid+'/wizard/'+s %>"
+         class="wizard-step-link" data-goto="<%= s %>"><span class="n"><%= si + 1 %></span> <%= labels[s] %></a>
+      <% } else if (isDraft && si <= step_i && (s === 'name' || s === 'source' || s === 'guide')) { %>
+      <a href="<%= draftStepHref(s) %>" class="wizard-step-link" data-goto="<%= s %>"><span class="n"><%= si + 1 %></span> <%= labels[s] %></a>
+      <% } else { %>
+      <span class="n"><%= si + 1 %></span> <%= labels[s] %>
+      <% } %>
+    </li>
+    <% }); %>
+  </ol>
+
+  <form class="form wizard-form" method="post" enctype="multipart/form-data" id="playlist-form"
+        action="<%= formAction %>">
+    <input type="hidden" name="slug" id="pl-slug-input" value="<%= playlist && playlist.slug ? playlist.slug : '' %>">
+    <input type="hidden" name="wizard_goto" id="wizard-goto" value="">
+
+    <% if (step === 'name') { %>
+    <section class="wizard-pane is-active">
+      <h2>Name</h2>
+      <p class="lede">What should this playlist be called?</p>
+      <label>Name
+        <input name="name" id="pl-name" required value="<%= playlist ? playlist.name : '' %>"
+               oninput="document.getElementById('pl-slug').textContent=slugify(this.value);document.getElementById('pl-slug-input').value=slugify(this.value)"
+               placeholder="Living Room TV" autocomplete="off">
+      </label>
+      <p class="hint">Public URL uses slug <code id="pl-slug"><%= playlist && playlist.slug ? playlist.slug : 'living-room-tv' %></code></p>
+      <% if (plid) { %>
+      <label class="check">
+        <input type="checkbox" name="enabled" value="1" <%= playlist.enabled ? 'checked' : '' %>>
+        Include in scheduled refresh
+      </label>
+      <p class="hint">Per-playlist timezone, time, days, and interval are set in <a href="/settings">Settings</a>.</p>
+      <% } %>
+    </section>
+    <% } %>
+
+    <% if (step === 'source') { %>
+    <%
+      const uploaded = typeof uploaded_m3u !== 'undefined' && uploaded_m3u ? uploaded_m3u : [];
+      const modeSet = (function(){
+        const raw = playlist && playlist.source_modes ? playlist.source_modes : 'iptvorg';
+        return new Set(String(raw).split(/[,\s]+/).filter(Boolean));
+      })();
+      if (!modeSet.size) modeSet.add('iptvorg');
+      // Heal UI: files on disk imply Upload mode
+      if (uploaded.length) modeSet.add('uploads');
+      // Heal UI: stored custom URLs imply M3U URL mode when nothing else selected for them
+      const savedCustomUrls = (function(){
+        const lines = [];
+        if (playlist && playlist.source_m3u_url) {
+          const modeRaw = String(playlist.source_modes || '');
+          const hasIptv = modeRaw.split(/[,\s]+/).includes('iptvorg') || modeSet.has('iptvorg');
+          String(playlist.source_m3u_url).split(/\r?\n/).forEach(function(line) {
+            line = (line || '').trim();
+            if (!line || line.indexOf('local://') === 0) return;
+            if (hasIptv && line.indexOf('iptv-org.github.io/iptv/countries/') !== -1) return;
+            lines.push(line);
+          });
+        }
+        return lines;
+      })();
+      if (savedCustomUrls.length) modeSet.add('urls');
+    %>
+    <section class="wizard-pane is-active" id="source-mode-root">
+      <h2>Channel source</h2>
+      <p class="lede">Choose one source, or check several to merge them.</p>
+
+      <div class="source-mode-picks" role="group" aria-label="Source types">
+        <label class="check">
+          <input type="checkbox" name="source_mode" value="iptvorg" <%= modeSet.has('iptvorg') ? 'checked' : '' %>>
+          <strong>iptv-org countries</strong>
+          <span class="muted small"> — public country playlists</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" name="source_mode" value="urls" <%= modeSet.has('urls') ? 'checked' : '' %>>
+          <strong>M3U URL(s)</strong>
+          <span class="muted small"> — paste remote playlist links</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" name="source_mode" value="uploads" <%= modeSet.has('uploads') ? 'checked' : '' %>>
+          <strong>Upload M3U file(s)</strong>
+          <span class="muted small"> — local .m3u / .m3u8</span>
+        </label>
+      </div>
+      <p class="hint" id="source-mode-hint">Select at least one source.</p>
+
+      <div class="source-panel" id="source-panel-iptvorg" <%= modeSet.has('iptvorg') ? '' : 'hidden' %>>
+        <h3>iptv-org countries</h3>
+        <label>Countries
+          <select name="countries" id="pl-countries" multiple size="7" class="multi">
+            <%
+              const selected = ((playlist && playlist.countries) ? playlist.countries : defaults.countries).split(/\s+/).filter(Boolean);
+              const selectedSet = new Set(selected.length ? selected : ['US']);
+              (countries || []).forEach(function(c) {
+            %>
+            <option value="<%= c.code %>" <%= selectedSet.has(c.code) ? 'selected' : '' %>><%= c.code %> — <%= c.name %></option>
+            <% }); %>
+          </select>
+          <span class="hint">Hold Ctrl/Cmd to select multiple. At least one country is used when iptv-org is checked.</span>
+        </label>
+      </div>
+
+      <div class="source-panel" id="source-panel-urls" <%= modeSet.has('urls') ? '' : 'hidden' %>>
+        <h3>M3U URL(s)</h3>
+        <label>Playlist URL(s) <span class="muted">(one per line)</span>
+          <textarea name="source_m3u_url" rows="4" placeholder="https://example.com/custom.m3u"><%= savedCustomUrls.join('\n') %></textarea>
+        </label>
+      </div>
+
+      <div class="source-panel" id="source-panel-uploads" <%= modeSet.has('uploads') ? '' : 'hidden' %>>
+        <h3>Upload M3U</h3>
+        <% if (uploaded.length) { %>
+        <ul class="upload-list" id="uploaded-m3u-list">
+          <% uploaded.forEach(function(name, ui) { %>
+          <li>
+            <span class="selectable-text mono"><%= name %></span>
+            <button type="submit"
+                    class="btn btn-secondary btn-small"
+                    form="m3u-del-<%= ui %>"
+                    formaction="<%= plid ? '/playlists/'+plid+'/uploads/m3u/delete' : '/playlists/new/uploads/m3u/delete' %>"
+                    formmethod="post">Delete</button>
+          </li>
+          <% }); %>
+        </ul>
+        <% } else { %>
+        <p class="muted small">No files uploaded yet.</p>
+        <% } %>
+        <label>Upload M3U file
+          <input type="file" name="m3u_file" accept=".m3u,.m3u8,audio/x-mpegurl,text/plain" multiple>
+        </label>
+        <p class="hint">Files stay with this playlist when you leave and return to this step.</p>
+      </div>
+    </section>
+    <script src="/static/source.js"></script>
+    <% } %>
+
+
+    <% if (step === 'guide') { %>
+    <%
+      const epgUrlText = playlist && playlist.epg_url
+        ? String(playlist.epg_url).replace(/,/g, '\n')
+        : '';
+      const sourceCountries = playlist && playlist.countries
+        ? String(playlist.countries).trim().split(/\s+/).filter(Boolean)
+        : [];
+      const primaryCountry = (sourceCountries[0] || '').toUpperCase();
+      const usesIptvorg = playlist && String(playlist.source_modes || '').split(/[,\s]+/).includes('iptvorg');
+      const catValue = (playlist && playlist.epg_category)
+        ? String(playlist.epg_category).trim()
+        : (primaryCountry || 'US');
+      const epgBase = typeof epg_base !== 'undefined' ? epg_base : 'https://raw.githubusercontent.com/umarjamilpc/EPG-LIST-GEN/main/epgs';
+      const helpersOpen = playlist && playlist.epg_category && playlist.epg_url;
+    %>
+    <section class="wizard-pane is-active">
+      <h2>EPG guide</h2>
+      <p class="lede">Optional. Paste remote guide URL(s). This app does not download or store EPG files — URLs are only written into the M3U header for your player.</p>
+
+      <label>EPG URL(s) <span class="muted">(one per line — or comma-separated)</span>
+        <textarea name="epg_url" rows="4" placeholder="https://example.com/guide.xml.gz"><%= epgUrlText %></textarea>
+      </label>
+
+      <label class="check">
+        <input type="checkbox" name="m3u_include_epg" value="1" <%= !playlist || playlist.m3u_include_epg ? 'checked' : '' %>>
+        Put EPG link(s) in M3U header (url-tvg)
+      </label>
+
+      <details class="advanced-block" id="epg-helpers" <%= helpersOpen ? 'open' : '' %>>
+        <summary>Optional: EPG-LIST-GEN helpers</summary>
+        <p class="hint">
+          Skip this unless you use guides from
+          <a href="https://github.com/umarjamilpc/EPG-LIST-GEN" target="_blank" rel="noopener">EPG-LIST-GEN</a>.
+          Most useful with <strong>iptv-org</strong> country sources; you can still use it with your own M3U if you match that folder layout.
+        </p>
+        <% if (usesIptvorg && primaryCountry) { %>
+        <p class="muted small">Primary source country: <strong id="epg-source-country"><%= primaryCountry %></strong><% if (sourceCountries.length > 1) { %> (first of <%= sourceCountries.join(', ') %>)<% } %></p>
+        <% } else if (!usesIptvorg) { %>
+        <p class="muted small">No iptv-org country selected — set the category folder manually if your EPG-LIST-GEN output uses one (e.g. <code>US</code>, <code>UK</code>).</p>
+        <% } %>
+        <label>Category folder
+          <input name="epg_category" id="epg-category" value="<%= catValue %>" placeholder="UK"
+                 data-epg-base="<%= epgBase %>"
+                 data-auto-country="<%= primaryCountry %>">
+          <span class="hint" id="epg-cat-hint">Presets use <code>epgs/<span id="epg-cat-label"><%= catValue || '…' %></span>/…</code></span>
+        </label>
+        <div class="actions toolbar-secondary">
+          <button type="button" class="btn btn-secondary" id="epg-preset-merged">Fill <span class="epg-preset-cat"><%= catValue || '…' %></span> merged EPG URL</button>
+        </div>
+      </details>
+    </section>
+    <script>
+    (function(){
+      var cat = document.getElementById('epg-category');
+      var label = document.getElementById('epg-cat-label');
+      var labels = document.querySelectorAll('.epg-preset-cat');
+      var merged = document.getElementById('epg-preset-merged');
+      if (!cat) return;
+      var base = (cat.dataset.epgBase || '').replace(/\/$/, '');
+      var auto = (cat.dataset.autoCountry || '').trim().toUpperCase();
+      if (auto && !cat.value.trim()) cat.value = auto;
+
+      function folder(){
+        return (cat.value || auto || 'US').trim().toUpperCase() || 'US';
+      }
+      function syncUi(){
+        var f = folder();
+        if (label) label.textContent = f;
+        labels.forEach(function(el){ el.textContent = f; });
+        if (merged) merged.dataset.url = base + '/' + f + '/merge/merged-epg.xml.gz';
+      }
+      cat.addEventListener('input', syncUi);
+      cat.addEventListener('change', syncUi);
+      syncUi();
+      if (merged) merged.addEventListener('click', function(){
+        var ta = document.querySelector('[name=epg_url]');
+        if (ta && this.dataset.url) {
+          var cur = (ta.value || '').trim();
+          ta.value = cur ? (cur + '\n' + this.dataset.url) : this.dataset.url;
+        }
+      });
+    })();
+    </script>
+    <% } %>
+
+    <% if (step === 'generate') { %>
+    <section class="wizard-pane is-active">
+      <h2>Generate</h2>
+      <p class="lede">Build the filtered playlist.m3u. EPG stays as the external URL(s) you set in Guide.</p>
+      <% if (typeof public_urls !== 'undefined' && public_urls) { %>
+      <p class="hint">Public playlist URL:<br><code><%= public_urls.playlist %></code></p>
+      <% } %>
+    </section>
+    <% } %>
+
+    <div class="wizard-nav">
+      <% if (prev_step) { %>
+      <button type="submit" class="btn btn-secondary" name="wizard_action" value="back">Back</button>
+      <% } else if (plid && playlist && !playlist.setup_complete) { %>
+      <form method="post" action="/playlists/<%= plid %>/delete" data-no-loading="1" style="display:inline" onsubmit="return confirm('Cancel setup and discard this playlist?')">
+        <button type="submit" class="btn btn-secondary">Cancel</button>
+      </form>
+      <% } else if (isDraft) { %>
+      <a class="btn btn-secondary" href="/playlists/new/cancel">Cancel</a>
+      <% } else { %>
+      <a class="btn btn-secondary" href="/">Cancel</a>
+      <% } %>
+      <% if (plid && playlist && !playlist.setup_complete && prev_step) { %>
+      <form method="post" action="/playlists/<%= plid %>/delete" data-no-loading="1" style="display:inline;margin-left:.5rem" onsubmit="return confirm('Discard this unfinished playlist?')">
+        <button type="submit" class="btn btn-secondary">Discard</button>
+      </form>
+      <% } %>
+      <div class="wizard-nav-right">
+        <% if (step === 'generate') { %>
+        <button type="submit" class="btn" name="wizard_action" value="generate">Save &amp; Generate</button>
+        <% } else { %>
+        <button type="submit" class="btn" name="wizard_action" value="next">Next</button>
+        <% } %>
+      </div>
+    </div>
+  </form>
+  <% if (step === 'source' && typeof uploaded_m3u !== 'undefined' && uploaded_m3u && uploaded_m3u.length) { %>
+  <% uploaded_m3u.forEach(function(name, ui) { %>
+  <form id="m3u-del-<%= ui %>" method="post" action="<%= plid ? '/playlists/'+plid+'/uploads/m3u/delete' : '/playlists/new/uploads/m3u/delete' %>" hidden>
+    <input type="hidden" name="filename" value="<%= name %>">
+  </form>
+  <% }); %>
+  <% } %>
+</div>
+<script>
+function slugify(v){
+  return (v||'').toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'').replace(/-+/g,'-').replace(/^-|-$/g,'') || 'playlist';
+}
+(function(){
+  var form = document.getElementById('playlist-form');
+  var gotoInput = document.getElementById('wizard-goto');
+  if (!form || !gotoInput) return;
+  document.querySelectorAll('a.wizard-step-link').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var dest = a.getAttribute('data-goto');
+      if (!dest) return;
+      e.preventDefault();
+      gotoInput.value = dest;
+      // Prefer next semantics so server saves then jumps
+      var act = form.querySelector('button[name=wizard_action][value=next]');
+      if (act) {
+        // Create a temporary action so save runs
+        var hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.name = 'wizard_action';
+        hidden.value = 'goto';
+        form.appendChild(hidden);
+      } else {
+        var h = document.createElement('input');
+        h.type = 'hidden';
+        h.name = 'wizard_action';
+        h.value = 'goto';
+        form.appendChild(h);
+      }
+      form.requestSubmit ? form.requestSubmit() : form.submit();
+    });
+  });
+})();
+</script>

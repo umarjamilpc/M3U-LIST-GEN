@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> · M3U-LIST-GEN</title>
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem('m3u-list-gen-theme') || localStorage.getItem('iptv-filter-theme');
+        if (t !== 'dark' && t !== 'light') {
+          t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.style.colorScheme = t;
+      } catch(e) {}
+      // Instant scroll restore (no top→down jerk) for in-app navigations
+      try {
+        if (sessionStorage.getItem('m3u-keep-scroll') === '1' || sessionStorage.getItem('iptv-keep-scroll') === '1') {
+          if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+          var y = Number(sessionStorage.getItem('m3u-scroll-y') || sessionStorage.getItem('iptv-scroll-y') || 0);
+          if (y > 0) {
+            var jump = function(){ window.scrollTo(0, y); };
+            document.addEventListener('DOMContentLoaded', jump, { once: true });
+            window.addEventListener('load', jump, { once: true });
+          }
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="/static/fonts.css">
+  <link rel="stylesheet" href="/static/style.css">
+  <style>html{background:var(--bg,#F7F7F5)}html[data-theme="dark"]{background:#0A0A0A}</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true"></span>
+      M3U-LIST-GEN
+    </a>
+    <% if (typeof user !== 'undefined' && user) { %>
+    <nav class="top-nav" aria-label="Main">
+      <a href="/" class="nav-link<%= typeof title !== 'undefined' && (title === 'Playlists' || title === 'Your playlists') ? ' is-active' : '' %>">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg>
+        Playlists
+      </a>
+
+      <div class="top-actions">
+        <button type="button" class="btn-icon theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"/>
+          </svg>
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </button>
+
+        <div class="user-menu" id="user-menu">
+          <button type="button" class="user-menu-btn" id="user-menu-btn" aria-expanded="false" aria-haspopup="true" aria-controls="user-menu-panel">
+            <span class="user-avatar" aria-hidden="true"><%= String(user.username || '?').slice(0,1).toUpperCase() %></span>
+            <span class="user-menu-label"><%= user.username %></span>
+            <svg class="user-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="user-menu-panel" id="user-menu-panel" hidden role="menu">
+            <a href="/storage" class="user-menu-item" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="18" height="6" rx="1"/></svg>
+              Storage
+            </a>
+            <a href="/settings" class="user-menu-item" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9c.3.6.9 1 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+              Settings
+            </a>
+            <% if (user.is_admin) { %>
+            <a href="/logs" class="user-menu-item" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+              Logs
+            </a>
+            <a href="/users" class="user-menu-item" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Users
+            </a>
+            <% } %>
+          </div>
+        </div>
+
+        <a class="btn-icon" href="/logout" aria-label="Log out" title="Log out">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <path d="m16 17 5-5-5-5"/>
+            <path d="M21 12H9"/>
+          </svg>
+        </a>
+      </div>
+    </nav>
+    <% } else { %>
+    <nav class="top-nav" aria-label="Theme">
+      <button type="button" class="btn-icon theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"/>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+    </nav>
+    <% } %>
+  </header>
+  <main class="wrap" id="main">
+    <%- body %>
+  </main>
+  <div id="help-pop" class="help-pop" hidden role="tooltip"></div>
+  <script src="/static/theme.js"></script>
+  <script src="/static/header.js"></script>
+  <script src="/static/help.js"></script>
+  <script src="/static/loading.js"></script>
+</body>
+</html>

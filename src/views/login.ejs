@@ -1,0 +1,16 @@
+<div class="auth reveal">
+  <h1>M3U-LIST-GEN
+    <button type="button" class="help-btn" data-help="Sign in with your M3U-LIST-GEN account." aria-label="Help">?</button>
+  </h1>
+  <p class="muted small" style="text-align:center;margin:-.5rem 0 1rem">Sign in to manage playlists</p>
+  <% if (error) { %><p class="err"><%= error %></p><% } %>
+  <form class="form" method="post" action="/login">
+    <label>Username
+      <input name="username" required autocomplete="username" autofocus>
+    </label>
+    <label>Password
+      <input name="password" type="password" required autocomplete="current-password">
+    </label>
+    <button type="submit" class="btn" style="width:100%">Sign in</button>
+  </form>
+</div>

@@ -1,0 +1,59 @@
+<div class="row-head page-head reveal">
+  <h1>Users
+    <button type="button" class="help-btn" data-help="Create accounts and set each user’s storage quota (MB). Leave blank to use the default from Settings. Upload size caps are global." aria-label="Help">?</button>
+  </h1>
+</div>
+<% if (error) { %><p class="err"><%= error %></p><% } %>
+<% if (message) { %><p class="ok-msg"><%= message %></p><% } %>
+
+<p class="muted small">Default quota: <strong><%= default_quota_mb ? (default_quota_mb + ' MB') : 'Unlimited' %></strong>
+  · Max M3U upload: <strong><%= max_m3u_mb %> MB</strong>
+  — change defaults in <a href="/settings">Settings</a>.</p>
+
+<form class="form inline" method="post" action="/users">
+  <label>Username <input name="username" required pattern="[a-zA-Z0-9_\-\.]{2,32}"></label>
+  <label>Password <input type="password" name="password" required minlength="4"></label>
+  <label>Quota (MB) <input type="number" name="storage_quota_mb" min="0" step="1" placeholder="<%= default_quota_mb %>" title="Blank = default"></label>
+  <label class="check"><input type="checkbox" name="is_admin" value="1"> Admin</label>
+  <button type="submit" class="btn">Add user</button>
+</form>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Role</th>
+      <th>Used</th>
+      <th>Quota (MB)</th>
+      <th>Created</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% (users || []).forEach(function(u) { %>
+    <tr>
+      <td><%= u.username %></td>
+      <td><%= u.is_admin ? 'admin' : 'user' %></td>
+      <td class="muted"><%= u.usage_label %></td>
+      <td>
+        <form class="inline-quota" method="post" action="/users/<%= u.id %>/quota">
+          <input type="number" name="storage_quota_mb" min="0" step="1"
+                 value="<%= u.quota_mb %>"
+                 title="0 = unlimited; matches Settings default when saved as default value">
+          <button type="submit" class="btn btn-secondary">Save</button>
+        </form>
+      </td>
+      <td class="muted"><%= u.created_at %></td>
+      <td class="row-actions">
+        <% if (u.id !== user.id) { %>
+        <form method="post" action="/users/<%= u.id %>/delete" onsubmit="return confirm('Delete user, their playlists, generated files, and uploads?')">
+          <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
+        <% } %>
+      </td>
+    </tr>
+  <% }); %>
+  </tbody>
+</table>
+</div>

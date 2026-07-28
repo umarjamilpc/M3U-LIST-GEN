@@ -1,0 +1,125 @@
+<div class="job-panel">
+  <h1 id="job-title"><%= title %>
+    <button type="button" class="help-btn" data-help="Live progress while the server builds your M3U. Elapsed and ETA update while the job runs." aria-label="Help">?</button>
+  </h1>
+  <div class="progress" aria-label="Progress">
+    <div class="progress-bar" id="job-bar" style="width:0%"></div>
+  </div>
+  <p class="progress-pct"><span id="job-pct">0</span>%</p>
+  <p class="job-timing" id="job-timing">
+    <span>Elapsed <strong id="job-elapsed">0s</strong></span>
+    <span class="job-timing-sep">·</span>
+    <span>ETA <strong id="job-eta">—</strong></span>
+  </p>
+  <p id="job-step">Starting…</p>
+  <p id="job-detail" class="muted small"></p>
+  <% if (show_logs) { %>
+  <div class="job-log-wrap">
+    <div class="job-log-head">
+      <strong>Activity log</strong>
+      <button type="button" class="help-btn" data-help="Timestamped messages including each channel as it is matched/written. Use Copy or Download, or open Logs after finish." aria-label="Help">?</button>
+      <button type="button" class="btn btn-secondary" id="copy-log">Copy</button>
+      <a class="btn btn-secondary" id="dl-log" href="/api/jobs/<%= job_id %>/log.txt">Download</a>
+    </div>
+    <pre class="job-log" id="job-log" aria-live="polite"></pre>
+  </div>
+  <% } %>
+  <p id="job-error" class="err" hidden></p>
+  <p id="job-done" class="ok-msg" hidden>Finished — opening Playlists…</p>
+  <div class="actions" id="job-actions" hidden>
+    <a class="btn" id="job-next" href="<%= next_url %>">Playlists</a>
+    <% if (show_logs) { %>
+    <a class="btn btn-secondary" href="/logs?job=<%= job_id %>">View full log</a>
+    <% } %>
+  </div>
+</div>
+<script>
+(function(){
+  const jobId = <%- JSON.stringify(job_id) %>;
+  const nextUrl = <%- JSON.stringify(next_url) %>;
+  const showLogs = <%- JSON.stringify(!!show_logs) %>;
+  const bar = document.getElementById('job-bar');
+  const pct = document.getElementById('job-pct');
+  const step = document.getElementById('job-step');
+  const detail = document.getElementById('job-detail');
+  const elapsedEl = document.getElementById('job-elapsed');
+  const etaEl = document.getElementById('job-eta');
+  const logEl = document.getElementById('job-log');
+  const errEl = document.getElementById('job-error');
+  const doneEl = document.getElementById('job-done');
+  const actions = document.getElementById('job-actions');
+  const title = document.getElementById('job-title');
+  const copyBtn = document.getElementById('copy-log');
+  let timer = null;
+  let lastLogLen = 0;
+  let startedAt = null;
+
+  function formatDur(sec){
+    if(sec == null || sec < 0 || !isFinite(sec)) return '—';
+    const s = Math.round(sec);
+    const h = Math.floor(s / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    const r = s % 60;
+    if(h) return h + 'h ' + String(m).padStart(2,'0') + 'm ' + String(r).padStart(2,'0') + 's';
+    if(m) return m + 'm ' + String(r).padStart(2,'0') + 's';
+    return r + 's';
+  }
+
+  function renderLog(lines){
+    if(!showLogs || !logEl || !Array.isArray(lines)) return;
+    if(lines.length === lastLogLen) return;
+    lastLogLen = lines.length;
+    logEl.textContent = lines.join('\n');
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  copyBtn && copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(logEl.textContent || '');
+      copyBtn.textContent = 'Copied';
+      setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1200);
+    } catch (e) {
+      alert('Copy failed: ' + e);
+    }
+  });
+
+  async function poll(){
+    try {
+      const r = await fetch('/api/jobs/' + jobId, {headers:{'Accept':'application/json'}});
+      if(!r.ok){ step.textContent = 'Job not found'; return; }
+      const j = await r.json();
+      bar.style.width = (j.percent||0) + '%';
+      pct.textContent = String(j.percent||0);
+      step.textContent = j.step || '';
+      detail.textContent = j.detail || '';
+      if(j.created_at && !startedAt) startedAt = j.created_at;
+      if(j.elapsed_label) elapsedEl.textContent = j.elapsed_label;
+      else if(startedAt) elapsedEl.textContent = formatDur((Date.now()/1000) - startedAt);
+      if(j.status === 'done') etaEl.textContent = 'done (' + (j.elapsed_label || formatDur(j.elapsed_seconds)) + ' total)';
+      else if(j.status === 'error') etaEl.textContent = '—';
+      else etaEl.textContent = j.eta_label || '—';
+      renderLog(j.log || []);
+      if(j.title) {
+        const help = title.querySelector('.help-btn');
+        title.childNodes[0].textContent = j.title + ' ';
+        if(help) title.appendChild(help);
+      }
+      if(j.status === 'done'){
+        clearInterval(timer);
+        doneEl.hidden = false;
+        actions.hidden = false;
+        setTimeout(()=>{ location.href = nextUrl || '/'; }, 1200);
+      } else if(j.status === 'error'){
+        clearInterval(timer);
+        errEl.hidden = false;
+        errEl.textContent = j.error || 'Failed';
+        actions.hidden = false;
+      }
+    } catch(e){
+      detail.textContent = String(e);
+    }
+  }
+  poll();
+  timer = setInterval(poll, 400);
+})();
+</script>

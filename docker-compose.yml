@@ -1,0 +1,14 @@
+services:
+  m3u-list-gen:
+    container_name: M3U-LIST-GEN
+    image: ghcr.io/umarjamilpc/m3u-list-gen:latest
+    ports:
+      - "3000:3000"
+    environment:
+      SECRET_KEY: change-me-to-a-long-random-string
+      ADMIN_USERNAME: admin
+      ADMIN_PASSWORD: admin
+    volumes:
+      # Host bind mount — SQLite, uploads, generated M3U, cache
+      - /mnt/user/appdata/M3U-LIST-GEN/data:/data
+    restart: unless-stopped

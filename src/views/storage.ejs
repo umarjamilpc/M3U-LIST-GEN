@@ -1,0 +1,264 @@
+<div class="row-head page-head reveal">
+  <div>
+    <h1>Storage
+      <button type="button" class="help-btn" data-help="<% if (scope === 'admin') { %>Admin view: every user’s generated files and uploads, plus shared HTTP cache and database.<% } else { %>Your generated playlists and uploads. You can clear them here. Shared server cache is managed by admins.<% } %>" aria-label="Help">?</button>
+    </h1>
+    <p class="muted small">
+      <% if (scope === 'admin') { %>
+      All users — generated M3U, uploads, cache, and database.
+      <% } else { %>
+      Your files only — generated M3U and uploads.
+      <% } %>
+    </p>
+  </div>
+  <a class="btn btn-secondary" href="/">Back</a>
+</div>
+
+<% if (message) { %><p class="ok-msg"><%= message %></p><% } %>
+<% if (error) { %><p class="err"><%= error %></p><% } %>
+
+<div class="storage-summary">
+  <div class="stat">
+    <span class="muted small">Total</span>
+    <strong><%= formatBytes(totals.all) %></strong>
+  </div>
+  <div class="stat">
+    <span class="muted small">Generated M3U</span>
+    <strong><%= formatBytes(totals.generated_m3u) %></strong>
+  </div>
+  <div class="stat">
+    <span class="muted small">Uploads</span>
+    <strong><%= formatBytes(totals.uploads) %></strong>
+  </div>
+  <% if (scope !== 'admin' && quota) { %>
+  <div class="stat">
+    <span class="muted small">Quota</span>
+    <strong><% if (quota.unlimited) { %>Unlimited<% } else { %><%= formatBytes(quota.used) %> / <%= formatBytes(quota.bytes) %><% } %></strong>
+  </div>
+  <% } %>
+  <% if (scope === 'admin') { %>
+  <div class="stat">
+    <span class="muted small">Cache</span>
+    <strong><%= formatBytes(totals.cache) %></strong>
+  </div>
+  <div class="stat">
+    <span class="muted small">Database</span>
+    <strong><%= formatBytes(totals.database) %></strong>
+  </div>
+  <% } %>
+</div>
+
+<% if (scope !== 'admin') { %>
+<section class="panel storage-section">
+  <div class="row-head">
+    <h2>Your files</h2>
+    <div class="row-actions">
+      <% if (totals.generated_m3u > 0) { %>
+      <form method="post" action="/storage/delete" onsubmit="return confirm('Delete all your generated M3U files?')">
+        <input type="hidden" name="group" value="user_generated">
+        <button type="submit" class="btn btn-danger">Clear generated</button>
+      </form>
+      <% } %>
+      <% if (totals.uploads > 0) { %>
+      <form method="post" action="/storage/delete" onsubmit="return confirm('Delete all your uploaded M3U/EPG files?')">
+        <input type="hidden" name="group" value="user_uploads">
+        <button type="submit" class="btn btn-danger">Clear uploads</button>
+      </form>
+      <% } %>
+    </div>
+  </div>
+  <p class="muted small">Clearing generated files does not delete the playlist — rebuild to recreate them. Upload limits and quota are set by an admin.</p>
+</section>
+<% } %>
+
+<% if (scope === 'admin' && by_user && by_user.length) { %>
+<section class="panel storage-section">
+  <div class="row-head">
+    <h2>By user</h2>
+    <div class="row-actions">
+      <% if (sections.generated_m3u && sections.generated_m3u.length) { %>
+      <form method="post" action="/storage/delete" onsubmit="return confirm('Delete ALL users’ generated M3U files?')">
+        <input type="hidden" name="group" value="generated_m3u">
+        <button type="submit" class="btn btn-danger">Delete all M3U</button>
+      </form>
+      <% } %>
+      <% if (sections.uploads && sections.uploads.length) { %>
+      <form method="post" action="/storage/delete" onsubmit="return confirm('Delete ALL users’ uploads?')">
+        <input type="hidden" name="group" value="uploads">
+        <button type="submit" class="btn btn-danger">Delete all uploads</button>
+      </form>
+      <% } %>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Generated</th>
+          <th>Uploads</th>
+          <th>Total</th>
+          <th>Quota</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% by_user.forEach(function(u) { %>
+        <tr class="<%= focus_user === u.username ? 'is-focus' : '' %>">
+          <td>
+            <strong><%= u.username %></strong>
+            <% if (u.is_admin) { %><span class="muted small"> · admin</span><% } %>
+          </td>
+          <td><%= formatBytes(u.generated_m3u) %></td>
+          <td><%= formatBytes(u.uploads) %></td>
+          <td><strong><%= formatBytes(u.total) %></strong></td>
+          <td class="muted small">
+            <% if (!u.quota_mb) { %>Unlimited<% } else { %><%= formatBytes(u.total) %> / <%= u.quota_mb %> MB<% } %>
+          </td>
+          <td class="row-actions">
+            <% if (u.generated_m3u > 0) { %>
+            <form method="post" action="/storage/delete" onsubmit="return confirm('Delete generated files for <%= u.username %>?')">
+              <input type="hidden" name="group" value="user_generated">
+              <input type="hidden" name="username" value="<%= u.username %>">
+              <button type="submit" class="btn btn-danger">Clear M3U</button>
+            </form>
+            <% } %>
+            <% if (u.uploads > 0) { %>
+            <form method="post" action="/storage/delete" onsubmit="return confirm('Delete uploads for <%= u.username %>?')">
+              <input type="hidden" name="group" value="user_uploads">
+              <input type="hidden" name="username" value="<%= u.username %>">
+              <button type="submit" class="btn btn-danger">Clear uploads</button>
+            </form>
+            <% } %>
+          </td>
+        </tr>
+      <% }); %>
+      </tbody>
+    </table>
+  </div>
+</section>
+<% } %>
+
+<section class="panel storage-section">
+  <div class="row-head">
+    <h2>Generated files <span class="muted small"><%= formatBytes(totals.generated_m3u) %> · <%= (sections.generated_m3u || []).length %> file(s)</span></h2>
+  </div>
+  <% if (!sections.generated_m3u || !sections.generated_m3u.length) { %>
+  <p class="muted small">None yet. Rebuild a playlist to create files here.</p>
+  <% } else { %>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <% if (scope === 'admin') { %><th>User</th><% } %>
+          <th>File</th>
+          <th>Size</th>
+          <th>Modified</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% sections.generated_m3u.forEach(function(f) { %>
+        <tr>
+          <% if (scope === 'admin') { %><td><%= f.username || '—' %></td><% } %>
+          <td><code><%= f.rel || f.name %></code></td>
+          <td><%= formatBytes(f.size) %></td>
+          <td class="muted small"><% if (f.mtime) { %><time class="local-time" datetime="<%= f.mtime %>"><%= f.mtime %></time><% } else { %>—<% } %></td>
+          <td class="row-actions">
+            <form method="post" action="/storage/delete" onsubmit="return confirm('Delete this file?')">
+              <input type="hidden" name="group" value="file">
+              <input type="hidden" name="kind" value="generated">
+              <input type="hidden" name="rel" value="<%= f.rel || '' %>">
+              <% if (f.username) { %><input type="hidden" name="username" value="<%= f.username %>"><% } %>
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
+</section>
+
+<section class="panel storage-section">
+  <div class="row-head">
+    <h2>Uploads <span class="muted small"><%= formatBytes(totals.uploads) %></span></h2>
+  </div>
+  <% if (!sections.uploads || !sections.uploads.length) { %>
+  <p class="muted small">None</p>
+  <% } else { %>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <% if (scope === 'admin') { %><th>User</th><% } %>
+          <th>Playlist</th>
+          <th>File</th>
+          <th>Size</th>
+          <th>Modified</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% sections.uploads.slice(0, 80).forEach(function(f) { %>
+        <tr>
+          <% if (scope === 'admin') { %><td><%= f.username || '—' %></td><% } %>
+          <td><%= f.playlist_name || ('#' + f.playlist_id) %></td>
+          <td><code><%= f.rel || f.name %></code></td>
+          <td><%= formatBytes(f.size) %></td>
+          <td class="muted small"><% if (f.mtime) { %><time class="local-time" datetime="<%= f.mtime %>"><%= f.mtime %></time><% } else { %>—<% } %></td>
+          <td class="row-actions">
+            <form method="post" action="/storage/delete" onsubmit="return confirm('Delete this upload?')">
+              <input type="hidden" name="group" value="file">
+              <input type="hidden" name="kind" value="upload">
+              <input type="hidden" name="rel" value="<%= f.rel || '' %>">
+              <% if (f.username) { %><input type="hidden" name="username" value="<%= f.username %>"><% } %>
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
+</section>
+
+<% if (scope === 'admin') { %>
+<section class="panel storage-section">
+  <div class="row-head">
+    <h2>HTTP cache <span class="muted small"><%= formatBytes(totals.cache) %></span></h2>
+    <form method="post" action="/storage/delete" onsubmit="return confirm('Clear shared HTTP cache for everyone?')">
+      <input type="hidden" name="group" value="cache">
+      <button type="submit" class="btn btn-danger">Clear cache</button>
+    </form>
+  </div>
+  <p class="muted small">Shared across all users. Safe to clear — remote sources re-download when needed.</p>
+</section>
+
+<section class="panel storage-section">
+  <h2>Database</h2>
+  <p><strong><%= formatBytes(totals.database) %></strong> — shared app database (not deleted from this page).</p>
+</section>
+<% } %>
+
+<script>
+(function () {
+  document.querySelectorAll("time.local-time[datetime]").forEach(function (el) {
+    var raw = el.getAttribute("datetime");
+    if (!raw) return;
+    var d = new Date(raw);
+    if (isNaN(d.getTime())) return;
+    el.textContent = d.toLocaleString(undefined, {
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+    el.title = d.toString();
+  });
+})();
+</script>

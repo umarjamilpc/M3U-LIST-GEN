@@ -1,0 +1,33 @@
+<div class="create-boxes" data-playlist-id="<%= playlist.id %>">
+  <div class="create-channel-box" id="create-category-box">
+    <h3>New category</h3>
+    <p class="muted small">Create an empty category, then move or add channels into it.</p>
+    <div class="create-channel-grid create-category-grid">
+      <label>Name <input id="new-cat-name" placeholder="Category name" autocomplete="off"></label>
+      <div class="create-channel-actions">
+        <button type="button" class="btn" id="create-category-btn">Add category</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="create-channel-box" id="create-channel-box">
+    <h3>New channel</h3>
+    <p class="muted small">Add a custom channel. Name and stream URL are required.</p>
+    <div class="create-channel-grid">
+      <label>Name <input id="new-ch-name" placeholder="Channel name" autocomplete="off"></label>
+      <label>Category
+        <select id="new-ch-category" class="app-select">
+          <% (categories || []).forEach(function(cname) { %>
+          <option value="<%= cname %>" <%= cname === 'Other' ? 'selected' : '' %>><%= cname %></option>
+          <% }); %>
+        </select>
+      </label>
+      <label>Stream URL <input id="new-ch-url" placeholder="https://…/stream.ts"></label>
+      <label>Icon URL <input id="new-ch-logo" placeholder="https://…/logo.png"></label>
+      <label>tvg-id <input id="new-ch-tvg" placeholder="optional"></label>
+      <div class="create-channel-actions">
+        <button type="button" class="btn" id="create-channel-btn">Add channel</button>
+      </div>
+    </div>
+  </div>
+</div>
