@@ -1,0 +1,392 @@
+position,name,category,tvg_id,enabled,url
+1,WCBS-TV 2.1 (720p),Local NYC,WCBSTV21.us@HD,1,http://206.212.244.63/32/index.m3u8
+2,WNBC-DT1 (1080p),Local NYC,WNBC471.us@HD,1,https://d368vp0qqzvkid.cloudfront.net/11603/88889709/hls/master.m3u8?ads.xumo_channelId=88889709a&ads.xumo_ifaType=&ads.xumo_providerId=3816&ads.xumo_providerName=NBCNNY
+3,WNYW-DT1 (1080p),Local NYC,WNYW51.us@HD,1,https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00488-foxdigital-wnyw-lgus/playlist.m3u8
+4,WWOR-DT1,Local NYC,WWORTV91.us@HD,1,http://37c18028.akadatel.com/iptv/T6XNCP6L7LLKPD/1088/mpegts
+5,WMBC-DT1 (720p),Local NYC,WMBCTV631.us@HD,1,http://d029dcec.kazmazpaz.ru/iptv/GVR4V8HYAGBS5V/1098/manifest.m3u8
+6,ABC (720p),Broadcast,ABC.us@East,1,http://41.205.93.154/ABC/index.m3u8
+7,CBS (1080p),Broadcast,CBS.us@East,1,http://stream.cammonitorplus.net/1783/index.m3u8
+8,NBC (1080p),Broadcast,NBC.us@East,1,http://stream.cammonitorplus.net/1785/index.m3u8
+9,Fox (720p),Broadcast,Fox.us@East,1,http://stream.cammonitorplus.net/1752/index.m3u8
+10,CW (720p),Broadcast,CW.us@East,1,https://gpuserver3.tier1streams.com/CW/index.m3u8
+11,ION (1080p) [Geo-blocked],Broadcast,IONTV.us@East,1,https://pb-xhb3ic8b61whm.akamaized.net/Ion_US.m3u8
+12,MeTV (720p),Broadcast,MeTV.us@SD,1,http://40.160.24.53/METV/index.m3u8
+13,MeTV+ (720p),Broadcast,MeTVPlus.us@SD,1,http://206.212.244.63/111/index.m3u8
+14,Antenna TV (576p),Broadcast,AntennaTV.us@SD,1,https://gpuserver3.tier1streams.com/ANTENNA_TV/index.m3u8
+15,Cozi TV (1080p),Broadcast,CoziTV.us@SD,1,https://gpuserver3.tier1streams.com/COZI_TV/index.m3u8
+16,Localish (1080p),Broadcast,Localish.us@SD,1,https://dnmfq3sh1jipj.cloudfront.net/DisneyLocalish.m3u8
+17,Start TV (720p),Broadcast,StartTV.us@SD,1,http://40.160.24.55/START_TV/index.m3u8
+18,Buzzr (1080p),Broadcast,Buzzr.us@SD,1,http://23.237.104.106:8080/USA_BUZZR/index.m3u8
+19,Movies! (480p),Broadcast,Movies.us@SD,1,https://bozztv.com/dvrfl03/hdirect/hdirect-ovair1-movies!/index.m3u8
+20,Bounce (1080p),Broadcast,Bounce.us@SD,1,http://40.160.24.58/BOUNCE_TV/index.m3u8
+21,Comet (1080p),Broadcast,Comet.us@SD,1,https://fast-channels.sinclairstoryline.com/COMET/index.m3u8
+22,Charge! (1080p),Broadcast,Charge.us@SD,1,https://fast-channels.sinclairstoryline.com/CHARGE/index.m3u8
+23,Laff (1080p),Broadcast,Laff.us@SD,1,http://40.160.24.53/LAFF_TV/index.m3u8
+24,Grit (1080p),Broadcast,Grit.us@SD,1,https://gpuserver3.tier1streams.com/GRIT/index.m3u8
+25,FETV (720p),Broadcast,FETV.us@SD,1,http://206.212.244.63/60/index.m3u8
+26,Roar (1080p),Broadcast,Roar.us@SD,1,https://fast-channels.sinclairstoryline.com/TBD/index.m3u8
+27,Bounce XL (1080p),Broadcast,BounceXL.us@SD,1,https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01438-ewscrippscompan-bouncexl-tablo/playlist.m3u8
+28,Grit Xtra (1080p),Broadcast,GritXtra.us@SD,1,https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01438-ewscrippscompan-gritxtra-tablo/playlist.m3u8
+29,CBS News New York (720p),Local News,CBSNewsNewYork.us@SD,1,https://cbsn-ny.cbsnstream.cbsnews.com/out/v1/ec3897d58a9b45129a77d67aa247d136/master.m3u8
+30,News 12 New York (1080p),Local News,News12NewYork.us@SD,1,https://aegis-cloudfront-1.tubi.video/97fbb992-c212-4164-8406-abb6f731e517/playlist.m3u8
+31,News12 Bronx [Geo-blocked],Local News,News12Bronx.us@SD,1,https://mdc.ott.alticeusa.net/live4.ott.optimum.net/live4-uploads/N12XH_A1/index_new.m3u8?omap=https
+32,News12 Brooklyn [Geo-blocked],Local News,News12Brooklyn.us@SD,1,https://mdc.ott.alticeusa.net/live4.ott.optimum.net/live4-uploads/N12KH_A1/index_new.m3u8?omap=https
+33,News12 Westchester [Geo-blocked],Local News,News12Westchester.us@SD,1,https://mdc.ott.alticeusa.net/live4.ott.optimum.net/live4-uploads/N12WH_A1/index_new.m3u8?omap=https
+34,News12+ New York (1080p) [Geo-blocked],Local News,News12PlusNewYork.us@HD,1,https://mdc.ott.alticeusa.net/live4.ott.optimum.net/live4-uploads/N12PLUS_H_NYC_A1/index_new.m3u8
+35,News12+ New Jersey (1080p) [Geo-blocked],Local News,News12PlusNewJersey.us@HD,1,https://mdc.ott.alticeusa.net/live4.ott.optimum.net/live4-uploads/N12PLUS_H_NJ_A1/index_new.m3u8
+36,News12+ Long Island (1080p) [Geo-blocked],Local News,News12PlusLongIsland.us@HD,1,https://mdc.ott.alticeusa.net/live4.ott.optimum.net/live4-uploads/N12PLUS_H_LI_A1/index_new.m3u8
+37,White Plains Community Media (360p),Local News,WhitePlainsCommunityMedia.us@SD,1,https://stream.swagit.com/live-edge/whiteplainsny/smil:std-4x3-1-b/playlist.m3u8
+38,i24NEWS English USA (1080p),Local News,i24NEWSEnglishUSA.il@SD,1,https://fastly.live.brightcove.com/6386790908112/eu-central-1/5377161796001/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJob3N0IjoiZXJmajYzLmVncmVzcy53YzQ3bTEiLCJhY2NvdW50X2lkIjoiNTM3NzE2MTc5NjAwMSIsImVobiI6ImZhc3RseS5saXZlLmJyaWdodGNvdmUuY29tIiwiaXNzIjoiYmxpdmUtcGxheWJhY2stc291cmNlLWFwaSIsInN1YiI6InBhdGhtYXB0b2tlbiIsImF1ZCI6WyI1Mzc3MTYxNzk2MDAxIl0sImp0aSI6IjYzODY3OTA5MDgxMTIifQ._w5c3EwfnEecDCEpDaKuVz07uuEyUb3vXvQN3svv-oU/chunklist.m3u8
+39,Fox News Channel (720p),News,FoxNewsChannel.us@SD,1,http://41.205.77.102/FOX-NEWS/index.m3u8
+40,MS NOW (720p),News,MSNOW.us@SD,1,http://40.160.24.53/MSNBC/index.m3u8
+41,NBC News NOW (1080p),News,NBCNewsNOW.us@SD,1,https://d1si3n1st4nkgb.cloudfront.net/10502/88896001/hls/master.m3u8?ads.xumo_channelId=88896001
+42,ABC News Live 1 (720p),News,ABCNewsLive1.us@SD,1,https://abcnews-streams.akamaized.net/hls/live/2023560/abcnewshudson1/master.m3u8
+43,CBS News 24/7 (720p),News,CBSNews247.us@SD,1,https://jmp2.uk/plu-6350fdd266e9ea0007bedec5.m3u8
+44,CNBC (1080p),News,CNBC.us@SD,1,https://gpuserver3.tier1streams.com/CNBC/index.m3u8
+45,Fox Business Network (720p),News,FoxBusinessNetwork.us@SD,1,http://40.160.24.58/FOX_BUSINESS_NETWORK/index.m3u8
+46,Bloomberg TV (1080p),News,BloombergTV.us@US,1,http://23.237.104.106:8080/USA_BLOOMBERG/index.m3u8
+47,Cheddar News (1080p),News,CheddarNews.us@SD,1,https://hls.livecdn.io/cheddar.com/cheddar/playlist.m3u8
+48,Cheddar Business (720p),Business,CheddarBusiness.us@SD,1,https://gpuserver3.tier1streams.com/CHEDDAR_BUSINESS/index.m3u8
+49,LiveNOW from FOX (1080p) [Geo-blocked],News,LiveNOWfromFOX.us@SD,1,https://pb-k5p02dtnr2162.akamaized.net/LiveNOW_from_FOX.m3u8
+50,Scripps News (1080p),News,ScrippsNews.us@SD,1,https://aegis-cloudfront-1.tubi.video/7e1c26b7-7975-4240-9a4f-480eaa8f3ea4/playlist.m3u8
+51,NewsNation (720p),News,NewsNation.us@SD,1,http://40.160.24.58/NEWSNATION/index.m3u8
+52,Newsmax TV (720p),News,NewsmaxTV.us@SD,1,http://40.160.24.53/NEWSMAX/index.m3u8
+53,Newsmax 2 (1080p),News,Newsmax2.us@SD,1,https://amg00217-newsmax-newsmax-zeasn-022k9.amagi.tv/playlist.m3u8
+54,TODAY All Day (1080p),News,TODAYAllDay.us@SD,1,https://d37kx062o4ii0p.cloudfront.net/master.m3u8
+55,Free Speech TV (720p),News,FreeSpeechTV.us@SD,1,https://edge.fstv-live-linear-channel.top.comcast.net/Content/HLS_HLSv3/Live/channel(b168a609-19c1-2203-ae1d-6b9726f05e67)/index.m3u8
+56,OANPlus (1080p),News,OANPlus.us@SD,1,https://oan-plus-tcl.amagi.tv/playlist.m3u8
+57,One America News Network (1080p),News,OneAmericaNewsNetwork.us@SD,1,http://40.160.24.55/ONE_AMERICA_NEWS/index.m3u8
+58,Blaze Live (720p),News,BlazeLive.us@SD,1,https://jmp2.uk/plu-5e46fba0c43b0d00096e5ac1.m3u8
+59,Newsy (1080p),News,Newsy.us@SD,1,https://547f72e6652371c3.mediapackage.us-east-1.amazonaws.com/out/v1/e3e6e29095844c4ba7d887f01e44a5ef/index.m3u8
+60,Reuters (1080p),News,ReutersTV.us@SD,1,https://amg00453-reuters-amg00453c1-rakuten-uk-2110.playouts.now.amagi.tv/playlist/amg00453-reuters-reuters-rakutenuk/playlist.m3u8
+61,AccuWeather Network (720p),Weather,AccuWeatherNetwork.us@SD,1,https://gpuserver3.tier1streams.com/AccuWeather/index.m3u8
+62,AccuWeather Now (1080p),Weather,AccuWeatherNOW.us@SD,1,https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00684-accuweather-accuweather-plex/playlist.m3u8
+63,FOX Weather (1080p) [Geo-blocked],Weather,FoxWeather.us@SD,1,https://pb-hum8cczphcrpf.akamaized.net/FOX_Weather.m3u8
+64,SportsNet New York (1080p),Sports,SportsNetNewYork.us@SD,1,http://40.160.24.55/SNY/index.m3u8
+65,MSG (720p),Sports,MSG.us@SD,1,http://23.237.104.106:8080/USA_MSG/index.m3u8
+66,MSG 2 (720p),Sports,MSG2.us@SD,1,http://40.160.24.52/MSG_2/index.m3u8
+67,MSG Plus (720p),Sports,MSGPlus.us@SD,1,https://gpuserver3.tier1streams.com/MSG_PLUS/index.m3u8
+68,Yes Network (720p),Sports,YesNetwork.us@SD,1,http://23.237.104.106:8080/USA_YES_NETWORK/index.m3u8
+69,ESPNU (720p),Sports,ESPNU.us@SD,1,http://23.237.104.106:8080/USA_ESPNU/index.m3u8
+70,ESPNews (720p),Sports,ESPNews.us@SD,1,http://41.223.30.230/ESPNNEWS/index.m3u8
+71,NFL Network (720p),Sports,NFLNetwork.us@SD,1,http://23.237.104.106:8080/USA_NFL_NETWORK/index.m3u8
+72,MLB Network (1080p),Sports,MLBNetwork.us@SD,1,https://gpuserver3.tier1streams.com/MLB_Network/index.m3u8
+73,MLB Strike Zone (720p),Sports,MLBStrikeZone.us@SD,1,http://23.237.104.106:8080/USA_MLB_STRIKE_ZONE/index.m3u8
+74,NBA TV (1080p),Sports,NBATV.us@SD,1,https://cdn1.ayitistream.com/NBATV/index.m3u8
+75,NHL Network (1080p),Sports,NHLNetwork.us@SD,1,https://nhl-firetv.amagi.tv/playlist.m3u8
+76,Fox Sports 1 (720p),Sports,FoxSports1.us@HD,1,http://85.237.89.160:9590/usa-s/FOX-SPORTS-1/index.m3u8
+77,Fox Sports 2,Sports,FoxSports2.us@HD,1,https://streamvidex.qzz.io/videx/fox2usa/index.m3u8
+78,CBS Sports Network USA (1080p),Sports,CBSSportsNetworkUSA.us@SD,1,https://gpuserver3.tier1streams.com/CBS_SPORTS_NETWORK/index.m3u8
+79,CBS Sports HQ (1080p) [Geo-blocked],Sports,CBSSportsHQ.us@SD,1,https://propee33f9c2.airspace-cdn.cbsivideo.com/index.m3u8
+80,NBC Sports NOW (1080p),Sports,NBCSportsNOW.us@SD,1,https://d4whmvwm0rdvi.cloudfront.net/10007/99993008/hls/master.m3u8?ads.xumo_channelId=99993008
+81,NBCSN (720p),Sports,NBCSN.us@SD,1,http://40.160.24.58/NBC_SPORTS_NETWORK/index.m3u8
+82,Golf Channel (1080p),Sports,GolfChannel.us@SD,1,https://gpuserver3.tier1streams.com/GOLF_CHANNEL/index.m3u8
+83,Tennis Channel (1080p),Sports,TennisChannel.us@SD,1,https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01444-tennischannelth-tennischannelnl-samsungnl/playlist.m3u8
+84,ACC Network (720p),Sports,ACCNetwork.us@SD,1,http://206.212.244.63/2486/index.m3u8
+85,SEC Network (720p),Sports,SECNetwork.us@SD,1,http://40.160.24.55/SEC_NETWORK/index.m3u8
+86,Big Ten Network (720p),Sports,BigTenNetwork.us@SD,1,http://23.237.104.106:8080/USA_BTN/index.m3u8
+87,FanDuel TV (720p),Sports,FanDuelTV.us@SD,1,http://40.160.24.55/TVG/index.m3u8
+88,FanDuel Racing (720p),Sports,FanDuelRacing.us@SD,1,http://206.212.244.63/6139/index.m3u8
+89,beIN Sports USA (720p),Sports,beINSportsUSA.us@SD,1,http://23.237.104.106:8080/USA_BEIN/index.m3u8
+90,beIN SPORTS XTRA (1080p),Sports,beINSPORTSXTRA.us@SD,1,https://bein-xtra-bein.amagi.tv/playlist.m3u8
+91,Fox Soccer Plus (720p),Sports,FoxSoccerPlus.us@SD,1,https://gpuserver3.tier1streams.com/FOX_SOCCER_PLUS/index.m3u8
+92,Willow (720p),Sports,Willow.us@SD,1,http://tvsen5.aynascope.net/willowhd/index.m3u8
+93,Willow Sports (1080p),Sports,WillowSports.us@SD,1,https://d36r8jifhgsk5j.cloudfront.net/Willow_TV.m3u8
+94,Outdoor Channel HD (1080p),Sports,OutdoorChannel.us@HD,1,http://40.160.24.55/OUTDOOR_CHANNEL/index.m3u8
+95,DraftKings Network (1080p),Sports,DraftKingsNetwork.us@SD,1,https://na.linear.zype.com/e0bd0e23-a958-4e43-8164-4f2fef8876a8/fd3614bd-90bf-4530-a277-65ae3a1720c8-zype/live.m3u8
+96,Pac 12 Insider (1080p),Sports,Pac12Insider.us@SD,1,https://pac12-firetv.amagi.tv/playlist.m3u8
+97,Stadium (720p),Sports,Stadium.us@SD,1,https://wurl120sports.global.transmit.live/hls/679a907dce42a042c23ace37/v1/stadium_gracenote/samsung_us/latest/main/hls/playlist.m3u8
+98,SportsGrid (1080p),Sports,SportsGrid.us@SD,1,https://sportsgrid-tribal.amagi.tv/playlist.m3u8
+99,Nickelodeon (1080p),Kids,Nickelodeon.us@East,1,http://23.237.104.106:8080/USA_NICKELODEON/index.m3u8
+100,FX (1080p),Entertainment,FX.us@East,1,http://23.237.104.106:8080/USA_FX/index.m3u8
+101,Oxygen (720p),Entertainment,Oxygen.us@East,1,http://40.160.24.55/OXYGEN/index.m3u8
+102,USA Network (1080p),Entertainment,USANetwork.us@East,1,http://40.160.24.55/USA_NETWORK/index.m3u8
+103,SYFY (1080p),Entertainment,SYFY.us@East,1,https://gpuserver5.tier1streams.com/SYFY/index.m3u8
+104,Bravo (1080p),Entertainment,Bravo.us@East,1,https://gpuserver3.tier1streams.com/BRAVO/index.m3u8
+105,VH1 (720p),Entertainment,VH1.us@East,1,http://40.160.24.55/VH1/index.m3u8
+106,MTV (720p),Entertainment,MTV.us@East,1,http://40.160.24.53/MTV/index.m3u8
+107,MTV2 (1080p),Entertainment,MTV2.us@East,1,http://40.160.24.53/MTV2/index.m3u8
+108,A&E (1080p),Entertainment,AE.us@East,1,https://gpuserver3.tier1streams.com/AE/index.m3u8
+109,E! (1080p),Entertainment,E.us@East,1,http://23.237.104.106:8080/USA_E/index.m3u8
+110,Comedy Central (1080p),Entertainment,ComedyCentral.us@East,1,http://23.237.104.106:8080/USA_COMEDY_CENTRAL/index.m3u8
+111,Lifetime (720p),Entertainment,Lifetime.us@East,1,http://40.160.24.53/LIFETIME/index.m3u8
+112,Lifetime Movies (1080p),Entertainment,LifetimeMovies.us@East,1,http://23.237.104.106:8080/USA_LMN/index.m3u8
+113,Paramount Network (720p),Entertainment,ParamountNetwork.us@East,1,http://40.160.24.55/PARAMOUNT_CHANNEL/index.m3u8
+114,Hallmark Channel (1080p),Entertainment,HallmarkChannel.us@East,1,http://23.237.104.106:8080/USA_HALLMARK/index.m3u8
+115,Hallmark Mystery (1080p),Movies,HallmarkMystery.us@East,1,http://40.160.24.53/HALLMARK_MOVIES_AND_MYSTERIES/index.m3u8
+116,AMC (720p),Entertainment,AMC.us@EastHD,1,http://23.239.31.26:8989/amc/index.m3u8
+117,BET (720p),Entertainment,BET.us@East,1,http://41.205.93.154/BET-EN/index.m3u8
+118,BET Her (720p),Entertainment,BETHer.us@East,1,http://41.205.93.154/BETHER/index.m3u8
+119,Game Show Network (1080p),Entertainment,GameShowNetwork.us@East,1,http://206.212.244.63/4237/index.m3u8
+120,BBC America East HD (720p),Entertainment,BBCAmerica.us@EastHD,1,https://gpuserver3.tier1streams.com/BBC_AMERICA/index.m3u8
+121,ION Plus (1080p),Entertainment,IONPlus.us@East,1,https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01438-ewscrippscompan-ionplus-tablo/playlist.m3u8
+122,Freeform (720p),Entertainment,Freeform.us@East,1,http://190.11.225.124:5000/live/freeform_hd/playlist.m3u8
+123,TV Land (720p),Entertainment,TVLand.us@East,1,http://40.160.24.55/TV_LAND/index.m3u8
+124,Sundance TV (720p),Entertainment,SundanceTV.us@East,1,http://40.160.24.55/SUNDANCE/index.m3u8
+125,IFC (1080p),Entertainment,IFC.us@East,1,http://23.237.104.106:8080/USA_IFC/index.m3u8
+126,FXX (1080p),Entertainment,FXX.us@East,1,http://23.237.104.106:8080/USA_FXX/index.m3u8
+127,FX Movie Channel (720p),Entertainment,FXMovieChannel.us@SD,1,http://40.160.24.52/FXM/index.m3u8
+128,Logo (720p),Entertainment,Logo.us@East,1,http://206.212.244.63/4242/index.m3u8
+129,Up TV (1080p),Entertainment,UpTV.us@SD,1,http://40.160.24.55/Up_TV/index.m3u8
+130,INSP (720p),Entertainment,INSP.us@SD,1,http://40.160.24.53/INSP/index.m3u8
+131,TV One (1080p),Entertainment,TVOne.us@SD,1,http://40.160.24.55/TV_ONE/index.m3u8
+132,Fuse (1080p),Entertainment,Fuse.us@East,1,http://23.237.104.106:8080/USA_FUSE/index.m3u8
+133,Revolt (720p),Entertainment,Revolt.us@SD,1,http://23.237.104.106:8080/USA_REVOLT/index.m3u8
+134,Aspire (1080p),Entertainment,Aspire.us@SD,1,http://206.212.244.63/10/index.m3u8
+135,Cleo TV (720p),Entertainment,CleoTV.us@SD,1,http://206.212.244.63/38/index.m3u8
+136,VICE TV (1080p),Entertainment,VICETV.us@SD,1,http://23.237.104.106:8080/USA_VICETV/index.m3u8
+137,FYI (720p),Entertainment,FYI.us@East,1,http://206.212.244.63/78/index.m3u8
+138,Ovation (1080p),Entertainment,Ovation.us@SD,1,http://40.160.24.55/OVATION/index.m3u8
+139,REELZ Famous & Infamous (1080p),Entertainment,Reelz.us@SD,1,https://d3serb1fmh623s.cloudfront.net/playlist.m3u8
+140,Great American Family (1080p),Entertainment,GreatAmericanFamily.us@SD,1,http://40.160.24.58/GAC_FAMILY/index.m3u8
+141,CMT (1080p),Entertainment,CMT.us@East,1,https://gpuserver3.tier1streams.com/CMT/index.m3u8
+142,AXS TV (1080p),Music,AXSTV.us@SD,1,https://gpuserver3.tier1streams.com/AXS_TV/index.m3u8
+143,History (720p),Documentary,History.us@East,1,http://40.160.24.53/HISTORY_CHANNEL/index.m3u8
+144,National Geographic (720p),Documentary,NationalGeographic.us@East,1,http://40.160.24.53/NAT_GEO/index.m3u8
+145,National Geographic Wild (720p),Documentary,NationalGeographicWild.us@East,1,http://40.160.24.53/NAT_GEO_WILD/index.m3u8
+146,Crime + Investigation (720p),Documentary,CrimePlusInvestigation.us@SD,1,http://23.237.104.106:8080/USA_CRIME_INVESTIGATION/index.m3u8
+147,Court TV (1080p),Documentary,CourtTV.us@SD,1,https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01438-ewscrippscompan-courttv-tablo/playlist.m3u8
+148,Law & Crime (720p),Documentary,LawCrime.us@SD,1,http://206.212.244.63/102/index.m3u8
+149,Smithsonian Channel (1080p),Documentary,SmithsonianChannel.us@East,1,http://40.160.24.55/SMITHSONIAN/index.m3u8
+150,Discovery Turbo (720p),Documentary,DiscoveryTurbo.us@SD,1,https://gpuserver3.tier1streams.com/MOTORTREND/index.m3u8
+151,Pluto TV True Crime,Movies,PlutoTVTrueCrime.us@US,1,https://jmp2.uk/plu-5812be1c249444e05d09cc50.m3u8
+152,Pluto TV History,Movies,PlutoTVHistory.us@US,1,https://jmp2.uk/plu-5a4d35dfa5c02e717a234f86.m3u8
+153,Pluto TV Science,Movies,PlutoTVScience.us@US,1,https://jmp2.uk/plu-563a970aa1a1f7fe7c9daad7.m3u8
+154,Disney Channel (720p),Kids,DisneyChannel.us@East,1,http://206.212.244.63/650/index.m3u8
+155,Disney Junior (720p),Kids,DisneyJunior.us@East,1,http://23.237.104.106:8080/USA_DISNEY_JUNIOR/index.m3u8
+156,Disney XD (720p),Kids,DisneyXD.us@East,1,http://40.160.24.52/DISNEY_XD_HD/index.m3u8
+157,Nick Jr. (1080p),Kids,NickJr.us@East,1,http://40.160.24.55/NICK_JR/index.m3u8
+158,Nicktoons (1080p),Kids,Nicktoons.us@East,1,http://206.212.244.63/3151/index.m3u8
+159,TeenNick (720p),Kids,TeenNick.us@East,1,http://40.160.24.55/TEEN_NICK/index.m3u8
+160,BabyFirst (720p),Kids,BabyFirst.us@US,1,http://206.212.244.63/639/index.m3u8
+161,PBS Kids 24/7 (1080p),Kids,PBSKids247.us@SD,1,http://206.212.244.63/672/index.m3u8
+162,PBS Kids Eastern/Central (720p),Kids,PBSKidsEasternCentral.us@SD,1,https://2-fss-2.streamhoster.com/pl_140/amlst:200914-1298290/playlist.m3u8
+163,PBS National East (1080p) [Geo-blocked],Public TV,PBS.us@East,1,https://pbs.lls.cdn.pbs.org/est/index.m3u8
+164,PBS New Jersey NJ (WNJT) (1080p) [Not 24/7],Public TV,WNJT521.us@HD,1,https://wnjtdt.lls.pbs.org/out/v1/e62efd8d4f92403996425fc389df0ffd/index.m3u8
+165,FNX (1080p),Public TV,FNX.us@SD,1,https://fnx.lls.pbs.org/index.m3u8
+166,Showtime (1080p),Entertainment,Showtime.us@East,1,http://23.237.104.106:8080/USA_SHOWTIME/index.m3u8
+167,Showtime 2 (1080p),Movies,Showtime2.us@East,1,http://40.160.24.55/SHOWTIME_2/index.m3u8
+168,Showtime Extreme (1080p),Entertainment,ShowtimeExtreme.us@East,1,http://40.160.24.55/SHOWTIME_EXTREME/index.m3u8
+169,Showtime Next (720p),Movies,ShowtimeNext.us@East,1,http://40.160.24.55/SHOWTIME_NEXT/index.m3u8
+170,Showtime Family Zone (720p),Movies,ShowtimeFamilyZone.us@East,1,http://23.237.104.106:8080/USA_SHOWTIME_FAMILY/index.m3u8
+171,Starz (1080p),Entertainment,Starz.us@East,1,http://23.237.104.106:8080/USA_STARZ/index.m3u8
+172,Starz Edge (1080p),Entertainment,StarzEdge.us@East,1,http://40.160.24.55/STARZ_EDGE/index.m3u8
+173,Starz Encore (1080p),Entertainment,StarzEncore.us@East,1,http://40.160.24.55/STARZ_ENCORE/index.m3u8
+174,Starz Comedy (1080p),Entertainment,StarzComedy.us@East,1,http://23.237.104.106:8080/USA_STARZ_COMEDY/index.m3u8
+175,Starz Cinema (720p),Entertainment,StarzCinema.us@East,1,http://23.237.104.106:8080/USA_STARZ_CINEMA/index.m3u8
+176,Starz Kids & Family (1080p),Kids,StarzKidsFamily.us@East,1,http://23.237.104.106:8080/USA_STARZ_FAMILY/index.m3u8
+177,MGM+ (1080p),Entertainment,MGMPlus.us@East,1,https://gpuserver3.tier1streams.com/EPIX/index.m3u8
+178,MGM+ Drive-In (720p),Movies,MGMPlusDriveIn.us@SD,1,https://gpuserver3.tier1streams.com/EPIX_DRIVE-IN/index.m3u8
+179,MovieSphere (1080p),Movies,MovieSphere.us@US,1,https://amg00353-lionsgatestudio-moviesphere-xumo-zh5u0.amagi.tv/playlist.m3u8
+180,TBN (1080p),Religious,TBN.us@East,1,https://livecdn.use1-0004.jwplive.com/live/sites/Yal8cmyO/media/fCGf6ROk/live.isml/.m3u8
+181,TBN Inspire (1080p),Religious,TBNInspire.us@SD,1,https://livecdn.use1-0004.jwplive.com/live/sites/Yal8cmyO/media/yfFI83Xz/live.isml/.m3u8
+182,EWTN (720p) [Geo-blocked],Religious,EWTN.us@English,1,https://cdn3.wowza.com/1/QjRzVXJtVml5SUVx/WGJRSWxz/hls/live/playlist.m3u8
+183,Daystar TV (1080p),Religious,DaystarTV.us@SD,1,https://live-mcl.cdn01.net/smarttv/48vy43564/playlist.m3u8
+184,The Word Network (1080p),Religious,TheWordNetwork.us@SD,1,https://clouditize.piksel.tech/hls/live/2043070/ClouditizeStream1/playlist.m3u8
+185,Impact Network (720p),Religious,ImpactNetwork.us@SD,1,https://edge1.lifestreamcdn.com/live/impactroku1/index.m3u8
+186,QVC (720p),Shop,QVC.us@SD,1,http://40.160.24.55/QVC/index.m3u8
+187,QVC2 (720p),Shop,QVC2.us@SD,1,http://206.212.244.63/142/index.m3u8
+188,QVC 3 (1080p),Shop,QVC3.us@SD,1,https://qvc-amd-live.akamaized.net/hls/live/2034113/lsqvc3us/master.m3u8
+189,HSN (720p),Shop,HSN.us@East,1,http://40.160.24.53/HSN/index.m3u8
+190,HSN2 (720p),Shop,HSN2.us@SD,1,https://qvc-amd-live.akamaized.net/hls/live/2034113/lshsn2us/master.m3u8
+191,Shop LC (1080p),Shop,ShopLC.us@SD,1,https://cdn-shop-lc-01.akamaized.net/Content/DASH_DASH/Live/channel(ott)/master.mpd
+192,BX Inform (1080p),NYC Community,BXInform.us@SD,1,https://reflect-stream-bronxnet.cablecast.tv/live-8/live/stream-4/live.m3u8
+193,BX Inspire (720p),NYC Community,BXInspire.us@SD,1,https://reflect-stream-bronxnet.cablecast.tv/live-18/live/stream-7/live.m3u8
+194,BX Omni (720p),NYC Community,BXOmni.us@SD,1,https://reflect-stream-bronxnet.cablecast.tv/live-16/live/stream-1/live.m3u8
+195,BX Arts (720p),NYC Community,BXArts.us@SD,1,https://reflect-stream-bronxnet.cablecast.tv/live-19/live/stream-2/live.m3u8
+196,BX Culture (720p),NYC Community,BXCulture.us@SD,1,https://reflect-stream-bronxnet.cablecast.tv/live-7/live/stream-3/live.m3u8
+197,NYXT (1080p),NYC Community,NYXT.us@SD,1,https://reflect-stream-bronxnet.cablecast.tv/live-10/live/live.m3u8
+198,Fox Soul (1080p),Entertainment,FoxSoul.us@SD,1,https://fox-foxsoul-samsungus.amagi.tv/playlist.m3u8
+199,Jewish Life Television (1080p),Religious,JewishLifeTelevision.us@SD,1,https://jlt-jltv-strimm.otteravision.com/jlt/jltv/jltv.m3u8
+200,BYUtv (1080p),Entertainment,BYUTV.us@SD,1,https://d13j8jpstr8iqz.cloudfront.net/BYUtv.m3u8
+201,RFD-TV (1080p),Lifestyle,RFDTV.us@SD,1,http://40.160.24.55/RFD-TV/index.m3u8
+202,The Cowboy Channel (1080p),Sports,TheCowboyChannel.us@SD,1,https://gpuserver3.tier1streams.com/THE_COWBOY_CHANNEL/index.m3u8
+203,Access 4 PAC,Sports,Access4PAC.us@SD,1,https://reflect-channel18vod-springfield-il-us.cablecast.tv/live-16/live/stream-4/live.m3u8
+204,Nickelodeon Pluto TV (720p),Entertainment,NickelodeonPlutoTV.us@SD,1,https://jmp2.uk/plu-5ca673e0d0bd6c2689c94ce3.m3u8
+205,WFXT-DT2 (1080p),Broadcast,WFXT662.us@SD,1,https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01438-ewscrippscompan-ionmystery-tablo/playlist.m3u8
+206,The Now Network (480p) [Not 24/7],Religious,TheNowNetwork.us@SD,1,https://mediaprod1.nowcast.cc:5443/LiveApp/streams/anZPy7eaVWLyDMZB1697488814699.m3u8
+207,Samsung Wild Life (720p) [Geo-blocked],Entertainment,SamsungWildlife.us@SD,1,https://pb-olm46bexcljjf.akamaized.net/Samsung_Wild_Life.m3u8
+208,IBTV USA (576p),Entertainment,IBTVUSA.us@SD,1,http://tvsen7.aynascope.net/ibtvusa/index.m3u8
+209,Bravo West (1080p),Entertainment,Bravo.us@West,1,http://40.160.24.52/BRAVO_WEST/index.m3u8
+210,VH1 Queens of Reality,Entertainment,VH1QueensofReality.us@SD,1,https://jmp2.uk/plu-66abefe5d2d50d00082c7d12.m3u8
+211,Costa Mesa's Municipal Access Channel CMTV 3 (720p),Entertainment,CMTV.us@SD,1,https://cdn3.wowza.com/5/UWpORHhLSEs5SkJs/costamesa/G0075_002/playlist.m3u8
+212,TVS Quiz Show Network (720p),Entertainment,TVSQuizShowNetwork.us@SD,1,https://rpn.bozztv.com/gusa/gusa-tvsgameshow/index.m3u8
+213,ABC West (720p),Broadcast,ABC.us@West,1,http://stream.cammonitorplus.net/1797/index.m3u8
+214,Sony Canal Novelas,Movies,SonyCanalNovelas.us@SD,1,https://a89829b8dca2471ab52ea9a57bc28a35.mediatailor.us-east-1.amazonaws.com/v1/master/0fb304b2320b25f067414d481a779b77db81760d/CanelaTV_SonyCanalNovelas/playlist.m3u8
+215,Paramount+ Picks,Movies,ParamountPlusPicks.us@SD,1,https://jmp2.uk/plu-5ff8c708653d080007361b14.m3u8
+216,BET West (720p),Entertainment,BET.us@West,1,http://206.212.244.63/16/index.m3u8
+217,Freeform West (720p),Entertainment,Freeform.us@West,1,http://206.212.244.63/70/index.m3u8
+218,AWE (1080p),Entertainment,AWE.us@SD,1,https://gpuserver3.tier1streams.com/AWE/index.m3u8
+219,True History (720p),Documentary,TrueHistory.us@SD,1,https://linear-188.frequency.stream/dist/glewedtv/188/hls/master/playlist.m3u8
+220,Fox West (720p),Broadcast,Fox.us@West,1,http://stream.cammonitorplus.net/1799/index.m3u8
+221,Fox News International (720p),Broadcast,FoxNewsInternational.us@SD,1,https://gpuserver3.tier1streams.com/FOX/index.m3u8
+222,Comedy Central Animation,Entertainment,ComedyCentralAnimation.us@SD,1,https://jmp2.uk/plu-64f8a949f5b5e4000862467c.m3u8
+223,Access 19,Sports,Access19.us@SD,1,https://reflect-montgomerycommunitymedia.cablecast.tv/live-8/live/stream-3/live.m3u8
+224,Disney Channel West (720p),Kids,DisneyChannel.us@West,1,http://206.212.244.63/3146/index.m3u8
+225,BBC Food (1080p),Lifestyle,BBCFood.us@SD,1,https://d1e9r0b71zfwk7.cloudfront.net/playlist.m3u8
+226,AMC Absolute Reality,Entertainment,AbsoluteRealitybyWETV.us@SD,1,https://amc-absolutereality-1-us.plex.wurl.tv/playlist.m3u8
+227,Autentic Travel (1080p),Lifestyle,AutenticTravel.de@SD,1,https://cb0c87cc605942ff9766a4e6744bbadc.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticTravel/playlist.m3u8
+228,Cooking Panda (576p),Lifestyle,CookingPanda.us@SD,1,https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=46
+229,Disney XD West (480p),Kids,DisneyXD.us@West,1,http://tvsen5.aynascope.net/disneyxd/index.m3u8
+230,Lifetime Real Women (576p),Entertainment,LifetimeRealWomen.us@SD,1,http://40.160.24.58/LIFETIME_REAL_WOMEN/index.m3u8
+231,National Geographic HD East (720p),Broadcast,NationalGeographic.us@HDEast,1,http://198.58.104.90:8989/natgeo/index.m3u8
+232,Access Humboldt (1080p),Sports,AccessHumboldt.us@SD,1,https://rtmp-live-ingest-ap-northeast-2-universe-dacast-com.akamaized.net/transmuxv1/streams/f08fcd45-1d04-9a8c-39ca-f56091820e5c.m3u8
+233,BBC America (720p),Entertainment,BBCAmerica.us@East,1,http://23.239.31.26:8989/bbcamerica/index.m3u8
+234,The Johnny Carson Show (720p),Entertainment,JohnnyCarsonTV.us@SD,1,https://aegis-cloudfront-1.tubi.video/475550ae-8708-46a5-a7c3-54acb3d91480/playlist.m3u8
+235,Lifetime Movies West (1080p),Entertainment,LifetimeMovies.us@West,1,http://108.181.20.255:27347/livehttpplay?channel_id=23107
+236,Hallmark Movies & More (1080p),Movies,HallmarkMoviesMore.us@SD,1,https://dbrb49pjoymg4.cloudfront.net/v1/master/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/master.m3u8?ads.xumo_channelId=99991709
+237,KITV 4 Island News (720p),News,KITV41.us@HD,1,https://fuel-streaming-prod01.fuelmedia.io/v1/sem/c4067ddc-0e67-4928-b7ec-624481f721a6.m3u8
+238,ABN Africa (480p),Religious,ABNAfrica.us@SD,1,https://mediaserver.abnvideos.com/streams/abnafrica.m3u8
+239,BET Her West (720p),Entertainment,BETHer.us@West,1,http://206.212.244.63/19/index.m3u8
+240,Lone Star (1080p),Entertainment,LoneStar.us@SD,1,https://lonestar-rakuten.amagi.tv/playlist.m3u8
+241,WBRZ Weather Channel Baton Rouge LA (480p),Weather,WBRZTV21.us@HD,1,https://d2a6g6zgxepbwi.cloudfront.net/wbrz-edge/weather.stream_360p/playlist.m3u8
+242,FilAmTV Network (1080p),Entertainment,FilAmTVNetwork.us@HD,1,https://cdn.vegasplus.us/vegas/ftv/playlist.m3u8
+243,MTV Classic (720p),Entertainment,MTVClassic.us@East,1,http://206.212.244.63/117/index.m3u8
+244,Ketchup TV (720p),Entertainment,KetchupTV.us@SD,1,https://d24p9tv2w5yorn.cloudfront.net/vod.m3u8
+245,WGN-DT1 (720p),Entertainment,WGNDT1.us@SD,1,http://23.237.104.106:8080/USA_WGN/index.m3u8
+246,National Geographic Wild HD East (720p),Broadcast,NationalGeographicWild.us@HDEast,1,http://198.58.104.90:8989/natgeowild/index.m3u8
+247,Smithsonian Channel Selects,Documentary,SmithsonianChannelSelects.us@SD,1,https://jmp2.uk/plu-5f21ea08007a49000762d349.m3u8
+248,FYI West (1080p),Entertainment,FYI.us@West,1,http://108.181.20.255:27347/livehttpplay?channel_id=23108
+249,Mystery Science Theater 3000 (1080p),Entertainment,MysteryScienceTheater3000.us@SD,1,https://d1c73nj8qxp55a.cloudfront.net/Mystery_Science_Theater_3000.m3u8
+250,Crímenes imperfectos,Documentary,CrimenesImperfectos.us@SD,1,https://jmp2.uk/plu-5e94cd036cc69d0007e8a1ba.m3u8
+251,American Horrors (480p),Movies,AmericanHorrors.us@SD,1,http://107.167.7.162:8081/playlist/amhor/playlist.m3u8
+252,Pluto TV Military,Movies,PlutoTVMilitary.us@SD,1,https://jmp2.uk/plu-5bb3fea0f711fd76340eebff.m3u8
+253,Hogan's Heroes,Entertainment,HogansHeroes.us@SD,1,https://jmp2.uk/plu-68939e206727ec919bb39061.m3u8
+254,Pop TV (720p),Entertainment,PopTV.us@SD,1,http://40.160.24.55/POP/index.m3u8
+255,Game Show Central (720p),Entertainment,GameShowCentral.us@SD,1,https://jmp2.uk/plu-5e54187aae660e00093561d6.m3u8
+256,Logo Pluto TV,Entertainment,LogoPlutoTV.us@SD,1,https://jmp2.uk/plu-5ce5a8954311f992edbe1da2.m3u8
+257,Jewelry Television (720p),Shop,JewelryTV.us@SD,1,https://content.jwplatform.com/live/broadcast/oe7UD7Ag.m3u8
+258,JBS (720p),Religious,JBS.us@SD,1,https://rpn3.bozztv.com/jbstv-srt/srt-push/jbstv/playlist.m3u8
+259,KPVM Newsmax 2,News,KPVMLD255.us@SD,1,https://2-fss-2.streamhoster.com/pl_120/206858-4404556-1/playlist.m3u8
+260,Top Stories by Newsy (720p),News,TopStoriesbyNewsy.us@SD,1,https://content.uplynk.com/channel/33c48f602cfd4474b957eb4ad999caf8.m3u8
+261,Access Nashua (720p),Sports,AccessNashua.us@SD,1,https://livestream.telvue.com/nashuanh1/f7b44cfafd5c52223d5498196c8a2e7b.sdp/playlist.m3u8
+262,CreaTV The Outlet Channel 30 (San Jose CA) (720p),Entertainment,CreaTVChannel30.us@SD,1,https://reflect-creatv.cablecast.tv/live-16/live/live.m3u8
+263,Disney Junior West (720p),Kids,DisneyJunior.us@West,1,http://206.212.244.63/655/index.m3u8
+264,Universal Cinema (1080p),Movies,UniversalCinema.us@SD,1,https://bantel-cdn1.iptvperu.tv:1936/btnscrtn/universalcinema/playlist.m3u8
+265,Nick Jr. Pluto TV (720p),Kids,NickJrPlutoTV.us@US,1,https://jmp2.uk/plu-5ca6748a37b88b269472dad9.m3u8
+266,Nicktoons West (1080p),Kids,Nicktoons.us@West,1,http://206.212.244.63/3152/index.m3u8
+267,MTV Live (1080p),Music,MTVLive.us@SD,1,http://40.160.24.53/MTV_LIVE/index.m3u8
+268,BET Jams (576p),Music,BETJams.us@SD,1,http://206.212.244.63/20/index.m3u8
+269,BET Soul (576p),Music,BETSoul.us@SD,1,http://206.212.244.63/21/index.m3u8
+270,CMT Equal Play (720p),Entertainment,CMTEqualPlay.us@SD,1,https://jmp2.uk/plu-5f68f53eb1e5800007390bf8.m3u8
+271,MLB Channel (1080p) [Geo-blocked],Sports,MLB.us@SD,1,https://pb-2y9ox4r1fy550.akamaized.net/playlist.m3u8
+272,TVS Pinball Network (480p),Sports,TVSPinballNetwork.us@SD,1,https://rpn.bozztv.com/gusa/gusa-TVSCartoonNetwork/index.m3u8
+273,NFL Channel (1080p) [Geo-blocked],Sports,NFLChannel.us@SD,1,https://pb-we3ltka9xobj6.akamaized.net/master.m3u8
+274,NBC West (720p),Broadcast,NBC.us@West,1,http://stream.cammonitorplus.net/1800/index.m3u8
+275,CBS Sports Golazo Network (720p),Sports,CBSSportsGolazoNetwork.us@SD,1,https://proped3fhg87.airspace-cdn.cbsivideo.com/golazo-live-dai/master/golazo-live-dai.m3u8
+276,KBEV Spectrum Channel 6 [Beverly Hills] (1080p),Public TV,KBEV.us@SD,1,https://s3-us-west-2.amazonaws.com/beverly-hills-high-school.castus-vod/live/ch1/video.m3u8
+277,fubo Sports Network (1080p),Sports,FuboSportsNetwork.us@SD,1,https://dnf08l6u6uxnz.cloudfront.net/master.m3u8
+278,BIG Community Channel,Entertainment,BIGCommunityChannel.us@SD,1,https://reflect-brookline-interactive-group.cablecast.tv/live-4/live/stream-1/live.m3u8
+279,FilmRise Classic TV (720p),Sports,FilmRiseClassicTV.us@SD,1,https://d2tv4k5moji5m7.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-lu4pzh9l4b57p/master.m3u8
+280,Fox News Radio (720p),News,FoxNewsRadio.us@SD,1,https://radiovid.foxnews.com/hls/live/661547/RADIOVID/index.m3u8
+281,MotorTrend FAST TV (720p),Auto,FastTV.us@SD,1,https://live-manifest.production-public.tubi.io/live/e7be5ad5-9044-4151-95d4-a9aae10ab0a5/playlist.m3u8
+282,30A Golf Kingdom (720p),Sports,30AGolfKingdom.us@SD,1,https://30a-tv.com/feeds/vidaa/golf.m3u8
+283,TennisChannel 2 (720p),Sports,TennisChannel.us@Plus2,1,https://jmp2.uk/plu-681109b688b9d85d0938c6ba.m3u8
+284,Outdoor Channel (1080p),Sports,OutdoorChannel.us@SD,1,https://amg00718-outdoorchannela-outdoortv-samsungau-uc7mp.amagi.tv/playlist/amg00718-outdoorchannela-outdoortv-samsungau/playlist.m3u8
+285,RVTV Grants Pass (720p),Sports,RVTVGrantsPass.us@SD,1,https://livestream.telvue.com/roguevalleycmttv4/f7b44cfafd5c52223d5498196c8a2e7b.sdp/playlist.m3u8
+286,Golden Community Television (GCO.tv) (Golden CO) (1080p),Broadcast,GCOtv.us@SD,1,https://reflect-golden-co.cablecast.tv/live-3/live/live.m3u8
+287,Lighting Lives Blessing Nations His Word (LLBN) (720p),Broadcast,LLBNHisWord.us@SD,1,https://brightstar-hisword-pull-secure.akamaized.net/brightstarhisword/stream.m3u8
+288,CFN Catholic Faith Network (720p),Religious,CatholicFaithNetwork.us@SD,1,https://uni8rtmp.tulix.tv/cfntv/cfntv/playlist.m3u8
+289,HSN West (720p),Shop,HSN.us@West,1,https://qvc-amd-live.akamaized.net/hls/live/2034113/lshsn1uswest/master.m3u8
+290,Gem Shopping Network (720p),Shop,GemShoppingNetwork.us@SD,1,https://amg01460-gemshoppingnetw-gem-ono-x662c.amagi.tv/playlist.m3u8
+291,Showtime West (720p),Movies,Showtime.us@West,1,http://40.160.24.55/SHOWTIME_WEST/index.m3u8
+292,TVS Hollywood History (582p),Documentary,TVSHollywoodHistory.us@SD,1,https://rpn.bozztv.com/gusa/gusa-tvshollywoohistory/index.m3u8
+293,B4U Movies USA (576p),Movies,B4UMovies.in@USA,1,http://41.223.30.230/B4UPLUS/index.m3u8
+294,BET Comedy Movies,Entertainment,BETComedyMovies.us@SD,1,https://jmp2.uk/plu-68c32d88f56983aba40052bd.m3u8
+295,Starz West (720p),Movies,Starz.us@West,1,http://40.160.24.55/STARZ_WEST/index.m3u8
+296,Flix (720p),Entertainment,Flix.us@East,1,https://gpuserver3.tier1streams.com/FLIX/index.m3u8
+297,FXM (720p),Entertainment,FXM.us@East,1,https://gpuserver3.tier1streams.com/FXM/index.m3u8
+298,AMC+ (720p),Entertainment,AMCPlus.us@SD,1,https://gpuserver3.tier1streams.com/AMC_PLUS/index.m3u8
+299,BET Classics,Entertainment,BETClassicsPlutoTV.us@SD,1,https://jmp2.uk/plu-60f85644a9493e0007a1f035.m3u8
+300,BET Pluto TV,Entertainment,BETPlutoTV.us@US,1,https://jmp2.uk/plu-5ca670f6593a5d78f0e85aed.m3u8
+301,MTVU (720p),Entertainment,MTVU.us@SD,1,http://206.212.244.63/119/index.m3u8
+302,NBC LX Home (1080p),Entertainment,NBCLXHome.us@HD,1,https://plex-xumoent-ch485-e7l5l.fast.nbcuni.com/live/master_5.m3u8
+303,NBCLX (1080p),Entertainment,NBCLX.us@SD,1,https://nbculocallive.akamaized.net/hls/live/2037096/lx/use1.m3u8
+304,Pluto TV Adventure,Movies,PlutoTVAdventure.us@US,1,https://jmp2.uk/plu-69d7ebb726eeec84158e28cb.m3u8
+305,Pluto TV Game Shows,Entertainment,PlutoTVGameShows.us@SD,1,https://jmp2.uk/plu-6036e7c385749f00075dbd3b.m3u8
+306,Pluto TV Pride,Movies,PlutoTVReality.us@US,1,https://jmp2.uk/plu-69fa3faab9c0f0d444e64de3.m3u8
+307,MTV Pluto TV,Entertainment,MTVPlutoTV.us@US,1,https://jmp2.uk/plu-5ca672f515a62078d2ec0ad2.m3u8
+308,Lifetime West (720p),Entertainment,Lifetime.us@West,1,http://108.181.20.255:27347/livehttpplay?channel_id=23106
+309,BET Throwbacks,Entertainment,BETThrowbacks.us@SD,1,https://jmp2.uk/plu-61326275b3c86a00078e4833.m3u8
+310,Comedy Central Pluto TV,Entertainment,ComedyCentralPlutoTV.us@US,1,https://jmp2.uk/plu-5ca671f215a62078d2ec0abf.m3u8
+311,NBC Comedy Vault (1080p),Comedy,NBCComedyVault.us@SD,1,https://xumo-xumoent-vc-105-z0vpm.fast.nbcuni.com/live/master.m3u8
+312,Pluto TV Comedy,Movies,PlutoTVComedy.us@US,1,https://jmp2.uk/plu-5a4d3a00ad95e4718ae8d8db.m3u8
+313,TV Land Sitcoms,Entertainment,TVLandSitcoms.us@SD,1,https://jmp2.uk/plu-5c2d64ffbdf11b71587184b8.m3u8
+314,AMC East (720p),Entertainment,AMC.us@East,1,http://41.223.30.230/AMC/index.m3u8
+315,BET Cinema,Entertainment,BETCinema.us@SD,1,https://jmp2.uk/plu-58af4c093a41ca9d4ecabe96.m3u8
+316,BET Visionaries,Entertainment,BETVisionaries.us@SD,1,https://jmp2.uk/plu-663946c1b18d700008d9c168.m3u8
+317,TV Land Drama,Entertainment,TVLandDrama.us@SD,1,https://jmp2.uk/plu-5d40bebc5e3d2750a2239d7e.m3u8
+318,Paramount Movie Channel,Movies,ParamountMovieChannel.us@SD,1,https://jmp2.uk/plu-5cb0cae7a461406ffe3f5213.m3u8
+319,Pluto TV Action,Broadcast,PlutoTVAction.us@US,1,https://jmp2.uk/plu-561d7d484dc7c8770484914a.m3u8
+320,Pluto TV Crime Drama,Movies,PlutoTVCrimeDrama.us@SD,1,https://jmp2.uk/plu-5f31fd1b4c510e00071c3103.m3u8
+321,Pluto TV Crime Movies,Movies,PlutoTVCrimeMovies.us@SD,1,https://jmp2.uk/plu-5f4d8594eb979c0007706de7.m3u8
+322,Pluto TV Cult Films,Movies,PlutoTVCultFilms.us@US,1,https://jmp2.uk/plu-5c665db3e6c01b72c4977bc2.m3u8
+323,Pluto TV Drama,Movies,PlutoTVDrama.us@US,1,https://jmp2.uk/plu-5b4e92e4694c027be6ecece1.m3u8
+324,Pluto TV Franchise Favorites,Movies,PlutoTVFranchiseFavorites.us@SD,1,https://jmp2.uk/plu-68fbf8101d26140175db8b58.m3u8
+325,Pluto TV Horror,Movies,PlutoTVHorror.us@US,1,https://jmp2.uk/plu-569546031a619b8f07ce6e25.m3u8
+326,Pluto TV Icons,Movies,PlutoTVIcons.us@SD,1,https://jmp2.uk/plu-64b585f84ea480000838e446.m3u8
+327,Pluto TV Reaction,Broadcast,PlutoTVReaction.us@SD,1,https://jmp2.uk/plu-617b37b361e0fd0008cfd8c5.m3u8
+328,Pluto TV Romance,Movies,PlutoTVRomance.us@US,1,https://jmp2.uk/plu-5a66795ef91fef2c7031c599.m3u8
+329,Pluto TV Sci-Fi,Movies,PlutoTVSciFi.us@US,1,https://jmp2.uk/plu-5b4fc274694c027be6ed3eea.m3u8
+330,Pluto TV Spotlight,Movies,PlutoTVSpotlight.us@SD,1,https://jmp2.uk/plu-5ba3fb9c4b078e0f37ad34e8.m3u8
+331,Pluto TV Staff Picks,Movies,PlutoTVStaffPicks.us@SD,1,https://jmp2.uk/plu-5f4d863b98b41000076cd061.m3u8
+332,Pluto TV Terror,Movies,PlutoTVTerror.us@SD,1,https://jmp2.uk/plu-5c6dc88fcd232425a6e0f06e.m3u8
+333,Pluto TV Thrillers,Movies,PlutoTVThrillers.us@US,1,https://jmp2.uk/plu-5b4e69e08291147bd04a9fd7.m3u8
+334,Pluto TV Trending Now,Movies,PlutoTVTrendingNow.us@SD,1,https://jmp2.uk/plu-673247127d5da5000817b4d6.m3u8
+335,Pluto TV Westerns,Movies,PlutoTVWesterns.us@US,1,https://jmp2.uk/plu-5b4e94282d4ec87bdcbb87cd.m3u8
+336,Hallmark Family (1080p),Movies,HallmarkFamily.us@SD,1,http://40.160.24.53/HALLMARK_DRAMA/index.m3u8
+337,MTV Biggest Pop (1080p),Entertainment,MTVBiggestPop.us@US,1,https://jmp2.uk/plu-5d14fd1a252d35decbc4080c.m3u8
+338,MTV Spankin' New (1080p),Entertainment,MTVSpankinNew.us@US,1,https://jmp2.uk/plu-5d14fdb8ca91eedee1633117.m3u8
+339,BET Gospel (576p),Entertainment,BETGospel.us@SD,1,http://206.212.244.63/17/index.m3u8
+340,Better Life TV (720p),Broadcast,BetterLifeTV.us@SD,1,https://tgn.bozztv.com/betterlife/betterlife/betterlife/index.m3u8
+341,Logos TV (1080p) [Not 24/7],Entertainment,LogosTV.es@SD,1,https://streamer1.streamhost.org/salive/logosH/master.m3u8
+342,Logos TV (1080p) [Not 24/7],Entertainment,LogosTV.us@SD,1,https://5a8308add0b31.streamlock.net/logoschannel.com/logostv.smil/playlist.m3u8
+343,Logos TV English (1080p) [Not 24/7],Entertainment,LogosTVEnglish.us@SD,1,https://5aafcc5de91f1.streamlock.net/logoschannel.com/logoseng/playlist.m3u8
+344,Logos TV Estudio (720p) [Not 24/7],Entertainment,LogosTVEstudio.es@SD,1,https://streamer1.streamhost.org/salive/logosdirectaH/playlist.m3u8
+345,Great American Faith & Living (1080p),Entertainment,GreatAmericanFaithLiving.us@SD,1,http://206.212.244.63/82/index.m3u8
+346,Better Health TV (480p),Entertainment,BetterHealthTV.us@SD,1,https://tgn.bozztv.com/betterlife/betterhealth/betterhealth/index.m3u8
+347,Logos TV Salud (720p) [Not 24/7],Entertainment,LogosTVSalud.es@SD,1,https://streamer1.streamhost.org/salive/logossaludH/playlist.m3u8
+348,ABC News Live 2 (720p),News,ABCNewsLive2.us@SD,1,https://abcnews-streams.akamaized.net/hls/live/2023561/abcnewshudson2/master.m3u8
+349,ABC News Live 3 (720p),News,ABCNewsLive3.us@SD,1,https://abcnews-streams.akamaized.net/hls/live/2023562/abcnewshudson3/master.m3u8
+350,ABC News Live 4 (720p),News,ABCNewsLive4.us@SD,1,https://abcnews-streams.akamaized.net/hls/live/2023563/abcnewshudson4/master.m3u8
+351,ABC News Live 5 (720p),News,ABCNewsLive5.us@SD,1,https://abcnews-streams.akamaized.net/hls/live/2023564/abcnewshudson5/master.m3u8
+352,ABC News Live 6 (720p),News,ABCNewsLive6.us@SD,1,https://abcnews-streams.akamaized.net/hls/live/2023565/abcnewshudson6/master.m3u8
+353,ABC News Live 7 (720p),News,ABCNewsLive7.us@SD,1,https://abcnews-streams.akamaized.net/hls/live/2023566/abcnewshudson7/master.m3u8
+354,ABC News Live 8 (720p),News,ABCNewsLive8.us@SD,1,https://abcnews-streams.akamaized.net/hls/live/2023567/abcnewshudson8/master.m3u8
+355,ABC News Live 9 (720p),News,ABCNewsLive9.us@SD,1,https://abcnews-streams.akamaized.net/hls/live/2023568/abcnewshudson9/master.m3u8
+356,ABC News Live 10 (720p),News,ABCNewsLive10.us@SD,1,https://abcnews-streams.akamaized.net/hls/live/2023569/abcnewshudson10/master.m3u8
+357,ABC WWAY 3,News,WWAY31.us@HD,1,https://townnews.g-mana.live/media/027a05c7-43b6-49eb-ad10-a0c0f10a0754/main.m3u8
+358,CBS News Bay Area (720p),News,CBSNewsBayArea.us@SD,1,https://cbsn-sf.cbsnstream.cbsnews.com/out/v1/dac63c1abb3f4a2dac9f508f44bb072a/master.m3u8
+359,CBS News Colorado (720p),News,CBSNewsColorado.us@SD,1,https://cbsn-den.cbsnstream.cbsnews.com/out/v1/2e49baf2906244ecb01b07d9885fbe7a/master.m3u8
+360,CBS News Detroit (720p),News,CBSNewsDetroit.us@SD,1,https://cbsn-det.cbsnstream.cbsnews.com/out/v1/169f5c001bc74fa7a179b19c20fea069/master.m3u8
+361,CBS News Minnesota (720p),News,CBSNewsMinnesota.us@SD,1,https://cbsn-min.cbsnstream.cbsnews.com/out/v1/76518f06941246ba810c8d175600bf74/master.m3u8
+362,CBS News Philadelphia (720p),News,CBSNewsPhilly.us@SD,1,https://cbsn-phi.cbsnstream.cbsnews.com/out/v1/5c9ad3e215984b0e9ad845b335216b72/master.m3u8
+363,CBS News Pittsburgh (720p),News,CBSNewsPittsburgh.us@SD,1,https://cbsn-pit.cbsnstream.cbsnews.com/out/v1/6966dabf8150405ab26f854e3cd6a2b8/master.m3u8
+364,CBS News Sacramento (720p),News,CBSNewsSacramento.us@SD,1,https://lineup.cbsivideo.com/playout/c1ed69db-6b71-4581-a937-a70ab4089f8a/index.m3u8
+365,NBC News NOW HD (720p),News,NBCNewsNOW.us@HD,1,http://206.212.244.63/127/index.m3u8
+366,Logos TV Kids (720p) [Not 24/7],Entertainment,LogosTVKids.es@SD,1,https://streamer1.streamhost.org/salive/logoskidsH/playlist.m3u8
+367,Pluto TV Fantastic,Movies,PlutoTVFantastic.us@SD,1,https://jmp2.uk/plu-5b64a245a202b3337f09e51d.m3u8
+368,Pluto TV Hometown Drama,Movies,PlutoTVHometownDrama.us@SD,1,https://jmp2.uk/plu-69d6c7befde57cd5ba0160c3.m3u8
+369,Pluto TV Lives,Movies,PlutoTVLives.us@US,1,https://jmp2.uk/plu-5d8beeb39b5d5d5f8c672530.m3u8
+370,MeTV Toons (720p),Broadcast,MeTVToons.us@SD,1,http://206.212.244.63/112/index.m3u8
+371,Pluto TV Anime,Movies,PlutoTVAnime.us@US,1,https://jmp2.uk/plu-5812b7d3249444e05d09cc49.m3u8
+372,Pluto TV Anime Movies,Movies,PlutoTVAnimeMovies.us@SD,1,https://jmp2.uk/plu-67ed8f7e443f0671bc2b2368.m3u8
+373,Outdoor America (1080p),Sports,OutdoorAmerica.us@SD,1,https://d1e354daam8g5r.cloudfront.net/playlist.m3u8
+374,Pluto TV Backcountry,Movies,PlutoTVBackcountry.us@SD,1,https://jmp2.uk/plu-5cabdf1437b88b26947346b2.m3u8
+375,History Hit (1080p),Documentary,HistoryHit.uk@SD,1,https://lds-timeline-rakuten.amagi.tv/playlist.m3u8
+376,Pluto TV Paranormal,Movies,PlutoTVParanormal.us@US,1,https://jmp2.uk/plu-5adf96e3e738977e2c31cb04.m3u8
+377,ACCDN (1080p),Sports,ACCDigitalNetwork.us@SD,1,https://raycom-accdn-firetv.amagi.tv/playlist.m3u8
+378,Pluto TV Competition,Broadcast,PlutoTVCompetition.us@SD,1,https://jmp2.uk/plu-603fde9026ecbf0007752c2c.m3u8
+379,Bloomberg Originals (1080p),News,BloombergOriginals.us@SD,1,https://86fdc85a.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctZ2JfQmxvb21iZXJnT3JpZ2luYWxzX0hMUw/playlist.m3u8
+380,Bloomberg Originals (1080p),News,BloombergOriginals.us@US,1,https://bloomberg.com/media-manifest/streams/qt.m3u8
+381,Bloomberg TV US Live Event (720p),News,BloombergTV.us@LiveEvent,1,https://bloomberg.com/media-manifest/streams/us-event.m3u8
+382,Bloomberg TV US Politics Live Event (720p),News,BloombergTV.us@PoliticsLiveEvent,1,https://bloomberg.com/media-manifest/streams/politics.m3u8
+383,Pluto TV Cars,Movies,PlutoTVCars.us@SD,1,https://jmp2.uk/plu-5812b3a4249444e05d09cc46.m3u8
+384,World Poker Tour (1080p),Sports,WorldPokerTour.us@US,1,https://d2e00kr7m9coe4.cloudfront.net/scheduler/scheduleMaster/406.m3u8
+385,Bellator MMA,Sports,BellatorMMA.us@SD,1,https://jmp2.uk/plu-5ebc8688f3697d00072f7cf8.m3u8
+386,NHRA TV (1080p),Sports,NHRATV.us@SD,1,https://d265y4sk8257lt.cloudfront.net/nh.m3u8
+387,PGA Tour (1080p),Sports,PGATour.us@SD,1,https://d11k1mnrgfposz.cloudfront.net/playlist.m3u8
+388,Rally TV (1080p),Sports,RallyTV.us@SD,1,https://rally-tv-live.akamaized.net/hls/live/2117704/RallyTV-Pri/master.m3u8
+389,TVS Sports (720p) [Not 24/7],Sports,TVSSports.us@SD,1,https://rpn.bozztv.com/gusa/gusa-tvssports/index.m3u8
+390,Unbeaten (1080p),Sports,Unbeaten.us@SD,1,https://lukentvlive.vgcdn.net/v1/master/cef183924f24adfa3d5d7601c3a17769082c0c2b/UnbeatenSports/playlist.m3u8
+391,Stories by AMC,Entertainment,StoriesbyAMC.us@SD,1,https://amc-amcpresents-1-us.xumo.wurl.tv/playlist.m3u8

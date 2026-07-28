@@ -172,6 +172,27 @@ Port **3000** and data path **`/data`** are set in the image. You only need to m
 
 ---
 
+## Troubleshooting
+
+### `ExperimentalWarning: SQLite is an experimental feature`
+
+This is **not an error**. Node.js labels its built-in `node:sqlite` module as experimental, but the app uses it normally and your logs show the server is healthy.
+
+The Docker image and `npm start` already pass `--disable-warning=ExperimentalWarning` to hide it. After pulling a new image:
+
+```bash
+docker compose pull
+docker compose up -d
+```
+
+To hide it on a one-off run:
+
+```bash
+node --disable-warning=ExperimentalWarning src/index.js
+```
+
+---
+
 ## License
 
 Use as you like for your own deployment. [EPG-LIST-GEN](https://github.com/umarjamilpc/EPG-LIST-GEN) is a separate project.

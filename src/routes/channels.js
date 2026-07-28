@@ -581,6 +581,7 @@ export default async function channelRoutes(app) {
     }
     const result = chstore.importChannelsCsv(playlistId, text, source);
     const msg = `CSV+import+updated+${result.updated}+added+${result.added}` +
+      (result.removed ? `+removed+${result.removed}` : "") +
       (result.missing.length ? `+missing+${result.missing.length}` : "");
     return reply.redirect(channelsNext(playlistId, msg, wizard));
   });

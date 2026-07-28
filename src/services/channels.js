@@ -810,13 +810,30 @@ export function parseChannelsCsv(text) {
   return rows;
 }
 
+function csvRowMatchesChannel(row, ch) {
+  if (row.url && ch.source_url && row.url === ch.source_url) return true;
+  if (row.tvg_id && ch.source_tvg_id && row.tvg_id === ch.source_tvg_id) {
+    if (row.url && ch.source_url && row.url !== ch.source_url) return false;
+    return true;
+  }
+  return false;
+}
+
 /**
- * Import CSV arrangement: match by url / tvg_id against existing or source,
- * then set category/name/enabled and global order.
+ * Import CSV arrangement: replace Your list with CSV rows only.
+ * Match by url / tvg_id against existing or source, then set category/name/enabled and order.
  */
 export function importChannelsCsv(playlistId, csvText, sourceChannels = []) {
   const parsed = parseChannelsCsv(csvText);
-  if (!parsed.length) return { updated: 0, added: 0, missing: [] };
+  if (!parsed.length) return { updated: 0, added: 0, removed: 0, missing: [] };
+
+  let removed = 0;
+  for (const ch of listChannels(playlistId)) {
+    if (parsed.some((row) => csvRowMatchesChannel(row, ch))) continue;
+    stashFromPlaylistChannel(ch);
+    deleteChannel(ch.id);
+    removed += 1;
+  }
 
   const existing = listChannels(playlistId);
   const byUrl = new Map(existing.map((c) => [c.source_url, c]));
@@ -829,6 +846,7 @@ export function importChannelsCsv(playlistId, csvText, sourceChannels = []) {
   );
 
   const orderedIds = [];
+  const seenIds = new Set();
   const missing = [];
   let added = 0;
   let updated = 0;
@@ -849,16 +867,25 @@ export function importChannelsCsv(playlistId, csvText, sourceChannels = []) {
         });
         if (matched.length) src = matched[0];
       }
-      if (src && addFromSourceChannel(playlistId, src)) {
-        added += 1;
-        const fresh = listChannels(playlistId).find(
-          (c) =>
-            c.source_url === src.url &&
-            (c.source_tvg_id || "") === (src.tvg_id || "")
-        );
-        ch = fresh;
-        if (ch) {
+      if (src) {
+        const addedRow = addFromSourceChannel(playlistId, src);
+        if (addedRow) {
+          added += 1;
+          ch = addedRow;
           byUrl.set(ch.source_url, ch);
+          if (ch.source_tvg_id) byTvg.set(ch.source_tvg_id, ch);
+        }
+      } else if (row.url || row.name) {
+        ch = createChannel(playlistId, {
+          name: row.name || "Channel",
+          custom_name: row.name,
+          source_url: row.url,
+          source_tvg_id: row.tvg_id,
+          category: row.category,
+        });
+        if (ch) {
+          added += 1;
+          if (ch.source_url) byUrl.set(ch.source_url, ch);
           if (ch.source_tvg_id) byTvg.set(ch.source_tvg_id, ch);
         }
       }
@@ -875,11 +902,13 @@ export function importChannelsCsv(playlistId, csvText, sourceChannels = []) {
       enabled: row.enabled,
     });
     updated += 1;
+    if (seenIds.has(ch.id)) continue;
+    seenIds.add(ch.id);
     orderedIds.push(ch.id);
   }
 
   if (orderedIds.length) reorderChannels(playlistId, orderedIds);
-  return { updated, added, missing };
+  return { updated, added, removed, missing };
 }
 
 /** Apply category order + per-category channel ids from the UI. */
