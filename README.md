@@ -94,6 +94,17 @@ docker compose pull
 docker compose up -d
 ```
 
+If the container crashes with `EACCES` / `permission denied` on `/data`, the host folder is not writable. Either:
+
+- recreate/redeploy with the latest image (runs as root and can write to the bind mount), or  
+- on Unraid, fix ownership then restart:
+
+```bash
+chmod -R 777 /mnt/user/appdata/M3U-LIST-GEN/data
+# or, for nobody:users, set in compose:  user: "99:100"
+docker compose up -d
+```
+
 Open **http://YOUR-SERVER-IP:3000**
 
 ### 3. Public access (Nginx Proxy Manager)
